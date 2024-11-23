@@ -14,7 +14,7 @@ A template repository to create godot project with the following features:
 
 1. Clone repository from template
 
-Replace all occurances of "godotTemplate" to your name
+Replace all occurances of "Godot25" to your name
 
 2. Configure android deployment keystores
 

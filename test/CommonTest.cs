@@ -1,4 +1,4 @@
-﻿namespace GodotTemplate.Tests
+﻿namespace Godot25.Tests
 {
     using NUnit.Framework;
 

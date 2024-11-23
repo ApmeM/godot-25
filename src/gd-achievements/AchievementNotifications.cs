@@ -1,5 +1,5 @@
 using Godot;
-using GodotTemplate.Achievements;
+using Godot25.Achievements;
 
 [SceneReference("AchievementNotifications.tscn")]
 public partial class AchievementNotifications

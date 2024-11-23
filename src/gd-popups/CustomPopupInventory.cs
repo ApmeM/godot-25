@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using GodotTemplate.Presentation.Utils;
+using Godot25.Presentation.Utils;
 
 [SceneReference("CustomPopupInventory.tscn")]
 [Tool]

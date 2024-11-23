@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Godot;
-using GodotTemplate.Presentation.Utils;
+using Godot25.Presentation.Utils;
 
 [SceneReference("CustomPopupInventorySlot.tscn")]
 [Tool]
