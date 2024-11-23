@@ -7,7 +7,8 @@ using Godot25.Presentation.Utils;
 [SceneReference("Main.tscn")]
 public partial class Main
 {
-    public TextureButton[] buttons = new TextureButton[25];
+    [Export]
+    public PackedScene GameButtonScene;
 
     private int nextToClick = 0;
     private DateTime? startedDate;
@@ -17,42 +18,19 @@ public partial class Main
         base._Ready();
         this.FillMembers();
 
-        buttons[0] = this.textureButton1;
-        buttons[1] = this.textureButton2;
-        buttons[2] = this.textureButton3;
-        buttons[3] = this.textureButton4;
-        buttons[4] = this.textureButton5;
-        buttons[5] = this.textureButton6;
-        buttons[6] = this.textureButton7;
-        buttons[7] = this.textureButton8;
-        buttons[8] = this.textureButton9;
-        buttons[9] = this.textureButton10;
-        buttons[10] = this.textureButton11;
-        buttons[11] = this.textureButton12;
-        buttons[12] = this.textureButton13;
-        buttons[13] = this.textureButton14;
-        buttons[14] = this.textureButton15;
-        buttons[15] = this.textureButton16;
-        buttons[16] = this.textureButton17;
-        buttons[17] = this.textureButton18;
-        buttons[18] = this.textureButton19;
-        buttons[19] = this.textureButton20;
-        buttons[20] = this.textureButton21;
-        buttons[21] = this.textureButton22;
-        buttons[22] = this.textureButton23;
-        buttons[23] = this.textureButton24;
-        buttons[24] = this.textureButton25;
-
         // For debug purposes all achievements can be reset
         // this.di.localAchievementRepository.ResetAchievements();
 
         this.achievementsButton.Connect(CommonSignals.Pressed, this, nameof(AchievementsButtonPressed));
-        this.startGame.Connect(CommonSignals.Pressed, this, nameof(LevelSelected));
+        this.startGame.Connect(CommonSignals.Pressed, this, nameof(GameStartButtonPressed));
 
-        for (var i = 0; i < buttons.Length; i++)
+        for (var i = 0; i < 25; i++)
         {
-            var b = buttons[i];
-            b.Connect(CommonSignals.Pressed, this, nameof(ButtonPressed), new Godot.Collections.Array { i });
+            var b = GameButtonScene.Instance<GameButton>();
+            b.Value = i + 1;
+            b.Disabled = true;
+            b.Connect(nameof(GameButton.Clicked), this, nameof(GameButtonPressed));
+            this.gameField.AddChild(b);
         }
     }
 
@@ -65,28 +43,28 @@ public partial class Main
         }
     }
 
-    private void ButtonPressed(int idx)
+    private void GameButtonPressed(GameButton button)
     {
         if (!startedDate.HasValue)
         {
             return;
         }
 
-        if (this.nextToClick == idx)
+        if (this.nextToClick == button.Value)
         {
-            buttons[idx].Disabled = true;
+            button.Disabled = true;
             this.nextToClick++;
         }
 
-        if (idx == 24)
+        if (nextToClick == 26)
         {
             startedDate = null;
         }
     }
 
-    private void LevelSelected()
+    private void GameStartButtonPressed()
     {
-        var childs = this.gameField.GetChildren().Cast<Node>().ToList();
+        var childs = this.gameField.GetChildren().Cast<GameButton>().ToList();
         Shuffle(childs);
         foreach (var c in childs)
         {
@@ -95,13 +73,10 @@ public partial class Main
         foreach (var c in childs)
         {
             this.gameField.AddChild(c);
+            c.Disabled = false;
         }
 
-        foreach (var b in buttons)
-        {
-            b.Disabled = false;
-        }
-        nextToClick = 0;
+        nextToClick = 1;
         startedDate = DateTime.Now;
     }
 

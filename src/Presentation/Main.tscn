@@ -1,86 +1,91 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Presentation/Main.cs" type="Script" id=1]
 [ext_resource path="res://gd-achievements/AchievementList.tscn" type="PackedScene" id=2]
 [ext_resource path="res://gd-popups/CustomPopup.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Presentation/item_slot.png" type="Texture" id=4]
-[ext_resource path="res://Presentation/inner_panel.png" type="Texture" id=5]
+[ext_resource path="res://Presentation/GameButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gd-popups/Xolonium-Regular.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 5 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
+GameButtonScene = ExtResource( 4 )
 
-[node name="MenuLayer" type="VBoxContainer" parent="."]
-margin_right = 271.0
-margin_bottom = 391.0
-custom_constants/separation = 20
+[node name="GameMarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 100
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 150
 
-[node name="AchievementsButton" type="Button" parent="MenuLayer"]
-margin_right = 271.0
-margin_bottom = 20.0
-text = "Achievements"
+[node name="MenuLayer" type="VBoxContainer" parent="GameMarginContainer"]
+margin_left = 20.0
+margin_top = 100.0
+margin_right = 460.0
+margin_bottom = 650.0
+custom_constants/separation = 40
 
-[node name="StartGame" type="Button" parent="MenuLayer"]
-margin_top = 40.0
-margin_right = 271.0
-margin_bottom = 60.0
+[node name="StartGame" type="Button" parent="GameMarginContainer/MenuLayer"]
+margin_right = 440.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
+custom_fonts/font = SubResource( 1 )
 text = "Start game"
 
-[node name="Time" type="Label" parent="MenuLayer"]
-margin_top = 80.0
-margin_right = 271.0
-margin_bottom = 94.0
-text = "Press start"
-
-[node name="CustomPopup" parent="MenuLayer" instance=ExtResource( 3 )]
+[node name="CustomPopup" parent="GameMarginContainer/MenuLayer" instance=ExtResource( 3 )]
 visible = false
 Title = "Achievements"
 
-[node name="CustomPopupContainer" parent="MenuLayer/CustomPopup" index="0"]
+[node name="CustomPopupContainer" parent="GameMarginContainer/MenuLayer/CustomPopup" index="0"]
 margin_right = 399.0
 margin_bottom = 454.0
 
-[node name="HeaderCenter" parent="MenuLayer/CustomPopup/CustomPopupContainer" index="0"]
+[node name="HeaderCenter" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer" index="0"]
 margin_right = 282.0
 
-[node name="HeaderMargin" parent="MenuLayer/CustomPopup/CustomPopupContainer/HeaderCenter" index="0"]
+[node name="HeaderMargin" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/HeaderCenter" index="0"]
 margin_left = 77.0
 margin_right = 204.0
 
-[node name="TitleBackground" parent="MenuLayer/CustomPopup/CustomPopupContainer/HeaderCenter/HeaderMargin" index="0"]
+[node name="TitleBackground" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/HeaderCenter/HeaderMargin" index="0"]
 margin_right = 127.0
 
-[node name="TitleMargin" parent="MenuLayer/CustomPopup/CustomPopupContainer/HeaderCenter/HeaderMargin" index="1"]
+[node name="TitleMargin" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/HeaderCenter/HeaderMargin" index="1"]
 margin_right = 127.0
 
-[node name="TitleLabel" parent="MenuLayer/CustomPopup/CustomPopupContainer/HeaderCenter/HeaderMargin/TitleMargin" index="0"]
+[node name="TitleLabel" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/HeaderCenter/HeaderMargin/TitleMargin" index="0"]
 margin_right = 117.0
 text = "Achievements"
 
-[node name="PopupContainer" parent="MenuLayer/CustomPopup/CustomPopupContainer" index="1"]
+[node name="PopupContainer" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer" index="1"]
 margin_right = 282.0
 margin_bottom = 416.0
 
-[node name="MarginContainer" parent="MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer" index="0"]
+[node name="MarginContainer" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer" index="0"]
 margin_right = 282.0
 margin_bottom = 395.0
 
-[node name="InventoryFrame" parent="MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer" index="0"]
+[node name="InventoryFrame" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer" index="0"]
 margin_right = 282.0
 margin_bottom = 395.0
 
-[node name="OuterInventoryMargin" parent="MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer" index="1"]
+[node name="OuterInventoryMargin" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer" index="1"]
 margin_right = 282.0
 margin_bottom = 395.0
 
-[node name="InventoryBackground" parent="MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer/OuterInventoryMargin" index="0"]
+[node name="InventoryBackground" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer/OuterInventoryMargin" index="0"]
 margin_right = 273.0
 margin_bottom = 386.0
 
-[node name="ContentMargin" parent="MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer/OuterInventoryMargin" index="1"]
+[node name="ContentMargin" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer/OuterInventoryMargin" index="1"]
 margin_right = 273.0
 margin_bottom = 386.0
 
-[node name="AchievementList" parent="MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer/OuterInventoryMargin/ContentMargin" index="0" instance=ExtResource( 2 )]
+[node name="AchievementList" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer/MarginContainer/OuterInventoryMargin/ContentMargin" index="0" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 9.0
@@ -88,681 +93,32 @@ margin_top = 9.0
 margin_right = 255.0
 margin_bottom = 368.0
 
-[node name="CloseButton" parent="MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer" index="1"]
+[node name="CloseButton" parent="GameMarginContainer/MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer" index="1"]
 margin_left = 273.0
 margin_right = 282.0
 margin_bottom = 395.0
 
-[node name="GameField" type="GridContainer" parent="MenuLayer"]
-margin_top = 114.0
-margin_right = 271.0
-margin_bottom = 391.0
+[node name="GameField" type="GridContainer" parent="GameMarginContainer/MenuLayer"]
+margin_top = 110.0
+margin_right = 440.0
+margin_bottom = 361.0
 size_flags_vertical = 3
 columns = 5
 
-[node name="CenterContainer1" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_right = 51.0
-margin_bottom = 53.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton1" type="TextureButton" parent="MenuLayer/GameField/CenterContainer1"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label1" type="Label" parent="MenuLayer/GameField/CenterContainer1"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "1"
-
-[node name="CenterContainer2" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 55.0
-margin_right = 106.0
-margin_bottom = 53.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton2" type="TextureButton" parent="MenuLayer/GameField/CenterContainer2"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label2" type="Label" parent="MenuLayer/GameField/CenterContainer2"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "2"
-
-[node name="CenterContainer3" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 110.0
-margin_right = 161.0
-margin_bottom = 53.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton3" type="TextureButton" parent="MenuLayer/GameField/CenterContainer3"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label3" type="Label" parent="MenuLayer/GameField/CenterContainer3"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "3"
-
-[node name="CenterContainer4" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 165.0
-margin_right = 216.0
-margin_bottom = 53.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton4" type="TextureButton" parent="MenuLayer/GameField/CenterContainer4"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label4" type="Label" parent="MenuLayer/GameField/CenterContainer4"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "4"
-
-[node name="CenterContainer5" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 220.0
-margin_right = 271.0
-margin_bottom = 53.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton5" type="TextureButton" parent="MenuLayer/GameField/CenterContainer5"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label5" type="Label" parent="MenuLayer/GameField/CenterContainer5"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "5"
-
-[node name="CenterContainer6" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_top = 57.0
-margin_right = 51.0
-margin_bottom = 109.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton6" type="TextureButton" parent="MenuLayer/GameField/CenterContainer6"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label6" type="Label" parent="MenuLayer/GameField/CenterContainer6"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "6"
-
-[node name="CenterContainer7" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 55.0
-margin_top = 57.0
-margin_right = 106.0
-margin_bottom = 109.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton7" type="TextureButton" parent="MenuLayer/GameField/CenterContainer7"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label7" type="Label" parent="MenuLayer/GameField/CenterContainer7"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "7"
-
-[node name="CenterContainer8" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 110.0
-margin_top = 57.0
-margin_right = 161.0
-margin_bottom = 109.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton8" type="TextureButton" parent="MenuLayer/GameField/CenterContainer8"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label8" type="Label" parent="MenuLayer/GameField/CenterContainer8"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "8"
-
-[node name="CenterContainer9" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 165.0
-margin_top = 57.0
-margin_right = 216.0
-margin_bottom = 109.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton9" type="TextureButton" parent="MenuLayer/GameField/CenterContainer9"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label9" type="Label" parent="MenuLayer/GameField/CenterContainer9"]
-margin_left = 21.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "9"
-
-[node name="CenterContainer10" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 220.0
-margin_top = 57.0
-margin_right = 271.0
-margin_bottom = 109.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton10" type="TextureButton" parent="MenuLayer/GameField/CenterContainer10"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label10" type="Label" parent="MenuLayer/GameField/CenterContainer10"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "10"
-
-[node name="CenterContainer11" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_top = 113.0
-margin_right = 51.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton11" type="TextureButton" parent="MenuLayer/GameField/CenterContainer11"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label11" type="Label" parent="MenuLayer/GameField/CenterContainer11"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "11"
-
-[node name="CenterContainer12" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 55.0
-margin_top = 113.0
-margin_right = 106.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton12" type="TextureButton" parent="MenuLayer/GameField/CenterContainer12"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label12" type="Label" parent="MenuLayer/GameField/CenterContainer12"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-
-[node name="CenterContainer13" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 110.0
-margin_top = 113.0
-margin_right = 161.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton13" type="TextureButton" parent="MenuLayer/GameField/CenterContainer13"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label13" type="Label" parent="MenuLayer/GameField/CenterContainer13"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "13"
-
-[node name="CenterContainer14" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 165.0
-margin_top = 113.0
-margin_right = 216.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton14" type="TextureButton" parent="MenuLayer/GameField/CenterContainer14"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label14" type="Label" parent="MenuLayer/GameField/CenterContainer14"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "14"
-
-[node name="CenterContainer15" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 220.0
-margin_top = 113.0
-margin_right = 271.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton15" type="TextureButton" parent="MenuLayer/GameField/CenterContainer15"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label15" type="Label" parent="MenuLayer/GameField/CenterContainer15"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "15"
-
-[node name="CenterContainer16" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_top = 169.0
-margin_right = 51.0
-margin_bottom = 221.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton16" type="TextureButton" parent="MenuLayer/GameField/CenterContainer16"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label16" type="Label" parent="MenuLayer/GameField/CenterContainer16"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "16"
-
-[node name="CenterContainer17" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 55.0
-margin_top = 169.0
-margin_right = 106.0
-margin_bottom = 221.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton17" type="TextureButton" parent="MenuLayer/GameField/CenterContainer17"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label17" type="Label" parent="MenuLayer/GameField/CenterContainer17"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "17"
-
-[node name="CenterContainer18" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 110.0
-margin_top = 169.0
-margin_right = 161.0
-margin_bottom = 221.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton18" type="TextureButton" parent="MenuLayer/GameField/CenterContainer18"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label18" type="Label" parent="MenuLayer/GameField/CenterContainer18"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "18"
-
-[node name="CenterContainer19" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 165.0
-margin_top = 169.0
-margin_right = 216.0
-margin_bottom = 221.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton19" type="TextureButton" parent="MenuLayer/GameField/CenterContainer19"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label19" type="Label" parent="MenuLayer/GameField/CenterContainer19"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "19"
-
-[node name="CenterContainer20" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 220.0
-margin_top = 169.0
-margin_right = 271.0
-margin_bottom = 221.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton20" type="TextureButton" parent="MenuLayer/GameField/CenterContainer20"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label20" type="Label" parent="MenuLayer/GameField/CenterContainer20"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "20"
-
-[node name="CenterContainer21" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_top = 225.0
-margin_right = 51.0
-margin_bottom = 277.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton21" type="TextureButton" parent="MenuLayer/GameField/CenterContainer21"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label21" type="Label" parent="MenuLayer/GameField/CenterContainer21"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "21"
-
-[node name="CenterContainer22" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 55.0
-margin_top = 225.0
-margin_right = 106.0
-margin_bottom = 277.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton22" type="TextureButton" parent="MenuLayer/GameField/CenterContainer22"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label22" type="Label" parent="MenuLayer/GameField/CenterContainer22"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "22"
-
-[node name="CenterContainer23" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 110.0
-margin_top = 225.0
-margin_right = 161.0
-margin_bottom = 277.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton23" type="TextureButton" parent="MenuLayer/GameField/CenterContainer23"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label23" type="Label" parent="MenuLayer/GameField/CenterContainer23"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "23"
-
-[node name="CenterContainer24" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 165.0
-margin_top = 225.0
-margin_right = 216.0
-margin_bottom = 277.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton24" type="TextureButton" parent="MenuLayer/GameField/CenterContainer24"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label24" type="Label" parent="MenuLayer/GameField/CenterContainer24"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "24"
-
-[node name="CenterContainer25" type="CenterContainer" parent="MenuLayer/GameField"]
-margin_left = 220.0
-margin_top = 225.0
-margin_right = 271.0
-margin_bottom = 277.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TextureButton25" type="TextureButton" parent="MenuLayer/GameField/CenterContainer25"]
-margin_left = 5.0
-margin_top = 6.0
-margin_right = 45.0
-margin_bottom = 46.0
-rect_min_size = Vector2( 40, 40 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-
-[node name="Label25" type="Label" parent="MenuLayer/GameField/CenterContainer25"]
-margin_left = 17.0
-margin_top = 19.0
-margin_right = 33.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "25"
-
-[editable path="MenuLayer/CustomPopup"]
+[node name="Time" type="Label" parent="GameMarginContainer/MenuLayer"]
+margin_top = 401.0
+margin_right = 440.0
+margin_bottom = 440.0
+custom_fonts/font = SubResource( 1 )
+text = "Press start"
+align = 1
+
+[node name="AchievementsButton" type="Button" parent="GameMarginContainer/MenuLayer"]
+margin_top = 480.0
+margin_right = 440.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 0, 70 )
+custom_fonts/font = SubResource( 1 )
+text = "Achievements"
+
+[editable path="GameMarginContainer/MenuLayer/CustomPopup"]
