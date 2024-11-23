@@ -60,12 +60,6 @@ jobs:
           sed -i "s/version\/code=1/version\/code=$GITHUB_RUN_NUMBER/" ./src/export_presets.cfg 
           sed -i "s/version\/name=\"1.0.0\"/version\/name=\"1.$GITHUB_RUN_NUMBER.0\"/" ./src/export_presets.cfg 
 
-      - name: Dotnet build
-        run: |
-          cd ./src
-          dotnet build
-          cd ../
-
       - name: Export game
         id: export
         uses: firebelley/godot-export@v4.4.0
