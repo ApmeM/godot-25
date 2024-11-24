@@ -51,6 +51,32 @@ public partial class GameButton
         this.AddToGroup(Groups.GameButton);
     }
 
+    public async void Shake()
+    {
+        const int distance = 3;
+        const float time = 0.05f;
+        const int repeats = 2;
+
+        this.tween.InterpolateProperty(this.textureButton, "rect_position", new Vector2(0, 0), new Vector2(distance, 0), time / 2);
+        this.tween.Start();
+        await this.ToSignal(this.tween, "tween_completed");
+
+        for (var i = 0; i < repeats; i++)
+        {
+            this.tween.InterpolateProperty(this.textureButton, "rect_position", new Vector2(distance, 0), new Vector2(-distance, 0), time);
+            this.tween.Start();
+            await this.ToSignal(this.tween, "tween_completed");
+            this.tween.InterpolateProperty(this.textureButton, "rect_position", new Vector2(-distance, 0), new Vector2(distance, 0), time);
+            this.tween.Start();
+            await this.ToSignal(this.tween, "tween_completed");
+        }
+
+        this.tween.InterpolateProperty(this.textureButton, "rect_position", new Vector2(distance, 0), new Vector2(0, 0), time/2);
+        this.tween.Start();
+        await this.ToSignal(this.tween, "tween_completed");
+
+    }
+
     private void ButtonPressed()
     {
         this.EmitSignal(nameof(Clicked), this);

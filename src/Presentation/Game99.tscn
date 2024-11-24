@@ -1,14 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://gd-popups/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Presentation/Game99.cs" type="Script" id=2]
 [ext_resource path="res://Presentation/GameButton.tscn" type="PackedScene" id=3]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 1 )
 
-[node name="Game25" type="VBoxContainer"]
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0, 0, 0, 0.862745, 0, 0, 0, 0.588235 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 3 )
+width = 1
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 1 )
+
+[node name="Game99" type="VBoxContainer"]
 margin_left = 20.0
 margin_top = 100.0
 margin_right = 460.0
@@ -16,247 +27,302 @@ margin_bottom = 650.0
 custom_constants/separation = 40
 script = ExtResource( 2 )
 
-[node name="ExitGame" type="Button" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 440.0
+margin_bottom = 70.0
+custom_constants/separation = 40
+
+[node name="RestartGame" type="Button" parent="HBoxContainer"]
+margin_right = 200.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
+text = "Restart"
+
+[node name="ExitGame" type="Button" parent="HBoxContainer"]
+margin_left = 240.0
 margin_right = 440.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
-custom_fonts/font = SubResource( 1 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
 text = "Exit"
 
-[node name="RestartGame" type="Button" parent="."]
+[node name="GameFieldContainer" type="MarginContainer" parent="."]
 margin_top = 110.0
 margin_right = 440.0
-margin_bottom = 180.0
-rect_min_size = Vector2( 0, 70 )
-custom_fonts/font = SubResource( 1 )
-text = "Start game"
-
-[node name="GameField" type="GridContainer" parent="."]
-margin_top = 220.0
-margin_right = 440.0
 margin_bottom = 471.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameField" type="GridContainer" parent="GameFieldContainer"]
+margin_right = 440.0
+margin_bottom = 361.0
 size_flags_vertical = 3
 columns = 5
 
-[node name="GameButton" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 85.0
-margin_bottom = 47.0
+margin_bottom = 69.0
 Disabled = true
 
-[node name="GameButton2" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton2" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 89.0
 margin_right = 174.0
-margin_bottom = 47.0
+margin_bottom = 69.0
 Disabled = true
 
-[node name="GameButton3" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton3" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 178.0
 margin_right = 263.0
-margin_bottom = 47.0
+margin_bottom = 69.0
 Disabled = true
 
-[node name="GameButton4" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton4" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 267.0
 margin_right = 352.0
-margin_bottom = 47.0
+margin_bottom = 69.0
 Disabled = true
 
-[node name="GameButton5" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton5" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 356.0
 margin_right = 440.0
-margin_bottom = 47.0
+margin_bottom = 69.0
 Disabled = true
 
-[node name="GameButton6" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton6" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 51.0
+margin_top = 73.0
 margin_right = 85.0
-margin_bottom = 98.0
+margin_bottom = 142.0
 Disabled = true
 
-[node name="GameButton7" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton7" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 89.0
-margin_top = 51.0
+margin_top = 73.0
 margin_right = 174.0
-margin_bottom = 98.0
+margin_bottom = 142.0
 Disabled = true
 
-[node name="GameButton8" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton8" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 178.0
-margin_top = 51.0
+margin_top = 73.0
 margin_right = 263.0
-margin_bottom = 98.0
+margin_bottom = 142.0
 Disabled = true
 
-[node name="GameButton9" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton9" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 267.0
-margin_top = 51.0
+margin_top = 73.0
 margin_right = 352.0
-margin_bottom = 98.0
+margin_bottom = 142.0
 Disabled = true
 
-[node name="GameButton10" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton10" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 356.0
-margin_top = 51.0
+margin_top = 73.0
 margin_right = 440.0
-margin_bottom = 98.0
+margin_bottom = 142.0
 Disabled = true
 
-[node name="GameButton11" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton11" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 102.0
+margin_top = 146.0
 margin_right = 85.0
-margin_bottom = 149.0
+margin_bottom = 215.0
 Disabled = true
 
-[node name="GameButton12" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton12" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 89.0
-margin_top = 102.0
+margin_top = 146.0
 margin_right = 174.0
-margin_bottom = 149.0
+margin_bottom = 215.0
 Disabled = true
 
-[node name="GameButton13" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton13" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 178.0
-margin_top = 102.0
+margin_top = 146.0
 margin_right = 263.0
-margin_bottom = 149.0
+margin_bottom = 215.0
 Disabled = true
 
-[node name="GameButton14" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton14" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 267.0
-margin_top = 102.0
+margin_top = 146.0
 margin_right = 352.0
-margin_bottom = 149.0
+margin_bottom = 215.0
 Disabled = true
 
-[node name="GameButton15" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton15" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 356.0
-margin_top = 102.0
+margin_top = 146.0
 margin_right = 440.0
-margin_bottom = 149.0
+margin_bottom = 215.0
 Disabled = true
 
-[node name="GameButton16" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton16" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 153.0
+margin_top = 219.0
 margin_right = 85.0
-margin_bottom = 200.0
+margin_bottom = 288.0
 Disabled = true
 
-[node name="GameButton17" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton17" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 89.0
-margin_top = 153.0
+margin_top = 219.0
 margin_right = 174.0
-margin_bottom = 200.0
+margin_bottom = 288.0
 Disabled = true
 
-[node name="GameButton18" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton18" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 178.0
-margin_top = 153.0
+margin_top = 219.0
 margin_right = 263.0
-margin_bottom = 200.0
+margin_bottom = 288.0
 Disabled = true
 
-[node name="GameButton19" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton19" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 267.0
-margin_top = 153.0
+margin_top = 219.0
 margin_right = 352.0
-margin_bottom = 200.0
+margin_bottom = 288.0
 Disabled = true
 
-[node name="GameButton20" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton20" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 356.0
-margin_top = 153.0
+margin_top = 219.0
 margin_right = 440.0
-margin_bottom = 200.0
+margin_bottom = 288.0
 Disabled = true
 
-[node name="GameButton21" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton21" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 204.0
+margin_top = 292.0
 margin_right = 85.0
-margin_bottom = 251.0
+margin_bottom = 361.0
 Disabled = true
 
-[node name="GameButton22" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton22" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 89.0
-margin_top = 204.0
+margin_top = 292.0
 margin_right = 174.0
-margin_bottom = 251.0
+margin_bottom = 361.0
 Disabled = true
 
-[node name="GameButton23" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton23" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 178.0
-margin_top = 204.0
+margin_top = 292.0
 margin_right = 263.0
-margin_bottom = 251.0
+margin_bottom = 361.0
 Disabled = true
 
-[node name="GameButton24" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton24" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 267.0
-margin_top = 204.0
+margin_top = 292.0
 margin_right = 352.0
-margin_bottom = 251.0
+margin_bottom = 361.0
 Disabled = true
 
-[node name="GameButton25" parent="GameField" instance=ExtResource( 3 )]
+[node name="GameButton25" parent="GameFieldContainer/GameField" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 356.0
-margin_top = 204.0
+margin_top = 292.0
 margin_right = 440.0
-margin_bottom = 251.0
+margin_bottom = 361.0
 Disabled = true
+
+[node name="HoverContainer" type="MarginContainer" parent="GameFieldContainer"]
+margin_right = 440.0
+margin_bottom = 361.0
+
+[node name="Background" type="TextureRect" parent="GameFieldContainer/HoverContainer"]
+margin_right = 440.0
+margin_bottom = 361.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 5 )
+expand = true
+
+[node name="HoverPanel" type="CenterContainer" parent="GameFieldContainer/HoverContainer"]
+margin_right = 440.0
+margin_bottom = 361.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HoverControlContainer" type="VBoxContainer" parent="GameFieldContainer/HoverContainer/HoverPanel"]
+margin_left = 120.0
+margin_top = 116.0
+margin_right = 320.0
+margin_bottom = 245.0
+custom_constants/separation = 20
+
+[node name="FinalTime" type="Label" parent="GameFieldContainer/HoverContainer/HoverPanel/HoverControlContainer"]
+margin_right = 200.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+
+[node name="StartGame" type="Button" parent="GameFieldContainer/HoverContainer/HoverPanel/HoverControlContainer"]
+margin_top = 59.0
+margin_right = 200.0
+margin_bottom = 129.0
+rect_min_size = Vector2( 200, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
+text = "Start"
 
 [node name="Time" type="Label" parent="."]
 margin_top = 511.0
 margin_right = 440.0
 margin_bottom = 550.0
-custom_fonts/font = SubResource( 1 )
-text = "Press start"
+custom_fonts/font = SubResource( 4 )
 align = 1

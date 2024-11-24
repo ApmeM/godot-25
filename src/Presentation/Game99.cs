@@ -2,7 +2,6 @@ using Godot;
 using Godot25.Presentation.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 [SceneReference("Game99.tscn")]
 public partial class Game99
@@ -20,15 +19,16 @@ public partial class Game99
         base._Ready();
         this.FillMembers();
 
-        this.restartGame.Connect(CommonSignals.Pressed, this, nameof(GameStartButtonPressed));
-
         InitButtons();
         foreach (GameButton b in this.gameField.GetChildren())
         {
             b.Connect(nameof(GameButton.Clicked), this, nameof(GameButtonPressed));
         }
 
+        this.restartGame.Visible = false;
         this.exitGame.Connect(CommonSignals.Pressed, this, nameof(ExitGameClicked));
+        this.startGame.Connect(CommonSignals.Pressed, this, nameof(GameStartButtonPressed));
+        this.restartGame.Connect(CommonSignals.Pressed, this, nameof(GameRestartButtonPressed));
     }
 
     private void ExitGameClicked()
@@ -64,8 +64,16 @@ public partial class Game99
         this.Data.Sort();
     }
 
-    private void GameStartButtonPressed()
+    private void GameStartButtonPressed(){
+        this.restartGame.Visible = true;
+        this.startGame.Text = "Restart";
+        GameRestartButtonPressed();
+    }
+
+    private void GameRestartButtonPressed()
     {
+        this.hoverContainer.Visible = false;
+
         InitButtons();
         nextToClick = 0;
         startedDate = DateTime.Now;
@@ -76,7 +84,7 @@ public partial class Game99
         base._Process(delta);
         if (startedDate.HasValue)
         {
-            this.time.Text = (DateTime.Now - startedDate.Value).ToString();
+            this.time.Text = (DateTime.Now - startedDate.Value).ToString(@"hh\:mm\:ss");
         }
     }
 
@@ -87,15 +95,21 @@ public partial class Game99
             return;
         }
 
-        if (this.Data[this.nextToClick] == button.Value)
+        if (this.Data[this.nextToClick] != button.Value)
         {
-            button.Disabled = true;
-            this.nextToClick++;
+            button.Shake();
+            return;
         }
+
+        button.Disabled = true;
+        this.nextToClick++;
 
         if (nextToClick == 25)
         {
             startedDate = null;
+            this.finalTime.Text = "Your time:\n" + this.time.Text;
+            this.time.Text = "";
+            this.hoverContainer.Visible = true;
         }
     }
 

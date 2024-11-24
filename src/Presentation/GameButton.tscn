@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Presentation/inner_panel.png" type="Texture" id=1]
-[ext_resource path="res://Presentation/item_slot.png" type="Texture" id=2]
+[ext_resource path="res://Presentation/GameButtonPressed.png" type="Texture" id=1]
+[ext_resource path="res://Presentation/GameButtonActive.png" type="Texture" id=2]
 [ext_resource path="res://Presentation/GameButton.cs" type="Script" id=3]
 [ext_resource path="res://gd-popups/Xolonium-Regular.ttf" type="DynamicFontData" id=4]
 
@@ -32,6 +32,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "1"
+text = "0"
 align = 1
 valign = 1
+
+[node name="Tween" type="Tween" parent="."]
