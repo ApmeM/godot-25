@@ -3,6 +3,7 @@ using Godot;
 using Godot25.Presentation.Utils;
 
 [SceneReference("GameButton.tscn")]
+[Tool]
 public partial class GameButton
 {
     private int value;
@@ -47,10 +48,16 @@ public partial class GameButton
         this.Value = this.value;
         this.Disabled = this.disabled;
         this.textureButton.Connect(CommonSignals.Pressed, this, nameof(ButtonPressed));
+        this.AddToGroup(Groups.GameButton);
     }
 
     private void ButtonPressed()
     {
         this.EmitSignal(nameof(Clicked), this);
     }
+}
+
+public partial class Groups
+{
+    public static string GameButton = nameof(GameButton);
 }

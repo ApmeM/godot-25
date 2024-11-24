@@ -2,7 +2,7 @@
 
 ## Overview
 
-The HTML5 result can be found here: https://apmem.github.io/godot-template/Godot.html
+The HTML5 result can be found here: https://apmem.github.io/godot-25/Godot.html
 
 A template repository to create godot project with the following features:
 - Automatic deploy to github pages and google play store on each commit to main branch

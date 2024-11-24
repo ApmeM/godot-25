@@ -1,0 +1,262 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://gd-popups/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Presentation/Game99.cs" type="Script" id=2]
+[ext_resource path="res://Presentation/GameButton.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[node name="Game25" type="VBoxContainer"]
+margin_left = 20.0
+margin_top = 100.0
+margin_right = 460.0
+margin_bottom = 650.0
+custom_constants/separation = 40
+script = ExtResource( 2 )
+
+[node name="ExitGame" type="Button" parent="."]
+margin_right = 440.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
+custom_fonts/font = SubResource( 1 )
+text = "Exit"
+
+[node name="RestartGame" type="Button" parent="."]
+margin_top = 110.0
+margin_right = 440.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 70 )
+custom_fonts/font = SubResource( 1 )
+text = "Start game"
+
+[node name="GameField" type="GridContainer" parent="."]
+margin_top = 220.0
+margin_right = 440.0
+margin_bottom = 471.0
+size_flags_vertical = 3
+columns = 5
+
+[node name="GameButton" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 85.0
+margin_bottom = 47.0
+Disabled = true
+
+[node name="GameButton2" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 89.0
+margin_right = 174.0
+margin_bottom = 47.0
+Disabled = true
+
+[node name="GameButton3" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 178.0
+margin_right = 263.0
+margin_bottom = 47.0
+Disabled = true
+
+[node name="GameButton4" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 267.0
+margin_right = 352.0
+margin_bottom = 47.0
+Disabled = true
+
+[node name="GameButton5" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 356.0
+margin_right = 440.0
+margin_bottom = 47.0
+Disabled = true
+
+[node name="GameButton6" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 51.0
+margin_right = 85.0
+margin_bottom = 98.0
+Disabled = true
+
+[node name="GameButton7" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 89.0
+margin_top = 51.0
+margin_right = 174.0
+margin_bottom = 98.0
+Disabled = true
+
+[node name="GameButton8" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 178.0
+margin_top = 51.0
+margin_right = 263.0
+margin_bottom = 98.0
+Disabled = true
+
+[node name="GameButton9" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 267.0
+margin_top = 51.0
+margin_right = 352.0
+margin_bottom = 98.0
+Disabled = true
+
+[node name="GameButton10" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 356.0
+margin_top = 51.0
+margin_right = 440.0
+margin_bottom = 98.0
+Disabled = true
+
+[node name="GameButton11" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 102.0
+margin_right = 85.0
+margin_bottom = 149.0
+Disabled = true
+
+[node name="GameButton12" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 89.0
+margin_top = 102.0
+margin_right = 174.0
+margin_bottom = 149.0
+Disabled = true
+
+[node name="GameButton13" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 178.0
+margin_top = 102.0
+margin_right = 263.0
+margin_bottom = 149.0
+Disabled = true
+
+[node name="GameButton14" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 267.0
+margin_top = 102.0
+margin_right = 352.0
+margin_bottom = 149.0
+Disabled = true
+
+[node name="GameButton15" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 356.0
+margin_top = 102.0
+margin_right = 440.0
+margin_bottom = 149.0
+Disabled = true
+
+[node name="GameButton16" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 153.0
+margin_right = 85.0
+margin_bottom = 200.0
+Disabled = true
+
+[node name="GameButton17" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 89.0
+margin_top = 153.0
+margin_right = 174.0
+margin_bottom = 200.0
+Disabled = true
+
+[node name="GameButton18" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 178.0
+margin_top = 153.0
+margin_right = 263.0
+margin_bottom = 200.0
+Disabled = true
+
+[node name="GameButton19" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 267.0
+margin_top = 153.0
+margin_right = 352.0
+margin_bottom = 200.0
+Disabled = true
+
+[node name="GameButton20" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 356.0
+margin_top = 153.0
+margin_right = 440.0
+margin_bottom = 200.0
+Disabled = true
+
+[node name="GameButton21" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 204.0
+margin_right = 85.0
+margin_bottom = 251.0
+Disabled = true
+
+[node name="GameButton22" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 89.0
+margin_top = 204.0
+margin_right = 174.0
+margin_bottom = 251.0
+Disabled = true
+
+[node name="GameButton23" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 178.0
+margin_top = 204.0
+margin_right = 263.0
+margin_bottom = 251.0
+Disabled = true
+
+[node name="GameButton24" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 267.0
+margin_top = 204.0
+margin_right = 352.0
+margin_bottom = 251.0
+Disabled = true
+
+[node name="GameButton25" parent="GameField" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 356.0
+margin_top = 204.0
+margin_right = 440.0
+margin_bottom = 251.0
+Disabled = true
+
+[node name="Time" type="Label" parent="."]
+margin_top = 511.0
+margin_right = 440.0
+margin_bottom = 550.0
+custom_fonts/font = SubResource( 1 )
+text = "Press start"
+align = 1
