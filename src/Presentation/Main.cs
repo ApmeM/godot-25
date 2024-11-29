@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using Godot25.Presentation.Utils;
 
@@ -27,9 +25,20 @@ public partial class Main
         this.gameContainer.ClearChildren();
         var game = button.GameToStart.Instance();
         this.gameContainer.AddChild(game);
-        game.Connect("ExitClick", this, nameof(ExitGameClicked));
+        game.Connect(nameof(GameBase.ExitClick), this, nameof(ExitGameClicked));
+        game.Connect(nameof(GameBase.LevelPassed), this, nameof(LevelPassed), new Godot.Collections.Array(button));
         this.gameContainer.Visible = true;
         this.menuLayer.Visible = false;
+    }
+
+    private void LevelPassed(LevelButton button)
+    {
+        var nextLevel = button.GetNextLevel();
+        if (nextLevel == null)
+        {
+            return;
+        }
+        nextLevel.Visible = true;
     }
 
     private void ExitGameClicked()

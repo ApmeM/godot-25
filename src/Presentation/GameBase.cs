@@ -12,6 +12,9 @@ public partial class GameBase
     [Signal]
     public delegate void ExitClick();
 
+    [Signal]
+    public delegate void LevelPassed();
+
     public readonly List<int> Data = new List<int>();
 
     public override void _Ready()
@@ -104,6 +107,7 @@ public partial class GameBase
             this.finalTime.Text = "Your time:\n" + this.time.Text;
             this.time.Text = "";
             this.hoverContainer.Visible = true;
+            this.EmitSignal(nameof(LevelPassed));
         }
     }
 
