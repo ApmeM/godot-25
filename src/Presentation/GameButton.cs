@@ -6,22 +6,25 @@ using Godot25.Presentation.Utils;
 [Tool]
 public partial class GameButton
 {
-    private int value;
+    private string text;
     private bool disabled;
 
     [Export]
-    public int Value
+    public string Text
     {
-        get => value;
+        get => text;
         set
         {
-            this.value = value;
+            this.text = value;
             if (IsInsideTree())
             {
                 this.label.Text = value.ToString();
             }
         }
     }
+
+    [Export]
+    public int Value { get; set; }
 
     [Export]
     public bool Disabled
@@ -45,7 +48,7 @@ public partial class GameButton
         base._Ready();
         this.FillMembers();
 
-        this.Value = this.value;
+        this.Text = this.text;
         this.Disabled = this.disabled;
         this.textureButton.Connect(CommonSignals.Pressed, this, nameof(ButtonPressed));
         this.AddToGroup(Groups.GameButton);
@@ -71,7 +74,7 @@ public partial class GameButton
             await this.ToSignal(this.tween, "tween_completed");
         }
 
-        this.tween.InterpolateProperty(this.textureButton, "rect_position", new Vector2(distance, 0), new Vector2(0, 0), time/2);
+        this.tween.InterpolateProperty(this.textureButton, "rect_position", new Vector2(distance, 0), new Vector2(0, 0), time / 2);
         this.tween.Start();
         await this.ToSignal(this.tween, "tween_completed");
 

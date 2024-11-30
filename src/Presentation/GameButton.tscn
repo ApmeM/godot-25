@@ -15,6 +15,7 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 3 )
+Text = "0"
 
 [node name="TextureButton" type="TextureButton" parent="."]
 anchor_right = 1.0

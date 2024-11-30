@@ -25,7 +25,11 @@ public partial class Game99
                 newValue = r.Next(99) + 1;
             }
             set.Add(newValue);
-            this.Data.Add(newValue);
+            this.Data.Add(new DataContent
+            {
+                Text = newValue.ToString(),
+                Value = newValue
+            });
         }
     }
 }

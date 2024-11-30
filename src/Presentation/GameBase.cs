@@ -2,6 +2,7 @@ using Godot;
 using Godot25.Presentation.Utils;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 
 [SceneReference("GameBase.tscn")]
 public partial class GameBase
@@ -15,7 +16,14 @@ public partial class GameBase
     [Signal]
     public delegate void LevelPassed();
 
-    public readonly List<int> Data = new List<int>();
+
+    protected struct DataContent
+    {
+        public string Text;
+        public int Value;
+    }
+
+    protected readonly List<DataContent> Data = new List<DataContent>();
 
     public override void _Ready()
     {
@@ -48,12 +56,13 @@ public partial class GameBase
         var i = 0;
         foreach (GameButton b in this.gameField.GetChildren())
         {
-            b.Value = Data[i % Data.Count];
+            b.Value = Data[i % Data.Count].Value;
+            b.Text = Data[i % Data.Count].Text;
             b.Disabled = false;
             i++;
         }
 
-        this.Data.Sort();
+        this.Data.Sort((a, b) => a.Value - b.Value);
     }
 
     protected virtual void InitData()
@@ -92,7 +101,7 @@ public partial class GameBase
             return;
         }
 
-        if (this.Data[this.nextToClick] != button.Value)
+        if (this.Data[this.nextToClick].Value != button.Value)
         {
             button.Shake();
             return;
