@@ -16,7 +16,6 @@ public partial class GameBase
     [Signal]
     public delegate void LevelPassed();
 
-
     protected struct DataContent
     {
         public string Text;
@@ -36,6 +35,7 @@ public partial class GameBase
             b.Connect(nameof(GameButton.Clicked), this, nameof(GameButtonPressed));
         }
 
+        this.labelNext.Visible = false;
         this.restartGame.Visible = false;
         this.exitGame.Connect(CommonSignals.Pressed, this, nameof(ExitGameClicked));
         this.startGame.Connect(CommonSignals.Pressed, this, nameof(GameStartButtonPressed));
@@ -82,6 +82,7 @@ public partial class GameBase
 
         InitButtons();
         nextToClick = 0;
+        this.labelNext.Text = $"Next: {this.Data[this.nextToClick].Text}";
         startedDate = DateTime.Now;
     }
 
@@ -110,27 +111,30 @@ public partial class GameBase
         button.Disabled = true;
         this.nextToClick++;
 
-        if (nextToClick == 25)
+        if (nextToClick < 25)
         {
-            var finalScore = DateTime.Now - startedDate.Value;
-            startedDate = null;
-            this.finalTime.Text = "Your time:\n" + finalScore.ToString(@"hh\:mm\:ss"); ;
-
-            var bestScore = di.repository.LoadGame(this.GetType().Name);
-            if (bestScore > finalScore)
-            {
-                di.repository.SaveGame(this.GetType().Name, finalScore);
-                this.finalTime.Text += "\nNEW BEST!!!";
-            }
-            else
-            {
-                this.finalTime.Text += "\nBest time:\n" + bestScore.ToString(@"hh\:mm\:ss"); ;
-            }
-
-            this.time.Text = "";
-            this.hoverContainer.Visible = true;
-            this.EmitSignal(nameof(LevelPassed));
+            this.labelNext.Text = $"Next: {this.Data[this.nextToClick].Text}";
+            return;
         }
+
+        var finalScore = DateTime.Now - startedDate.Value;
+        startedDate = null;
+        this.finalTime.Text = "Your time:\n" + finalScore.ToString(@"hh\:mm\:ss"); ;
+
+        var bestScore = di.repository.LoadGame(this.GetType().Name);
+        if (bestScore > finalScore)
+        {
+            di.repository.SaveGame(this.GetType().Name, finalScore);
+            this.finalTime.Text += "\nNEW BEST!!!";
+        }
+        else
+        {
+            this.finalTime.Text += "\nBest time:\n" + bestScore.ToString(@"hh\:mm\:ss"); ;
+        }
+
+        this.time.Text = "";
+        this.hoverContainer.Visible = true;
+        this.EmitSignal(nameof(LevelPassed));
     }
 
     private readonly Random r = new Random();
@@ -143,5 +147,10 @@ public partial class GameBase
             var k = r.Next(n + 1);
             (list[n], list[k]) = (list[k], list[n]);
         }
+    }
+
+    public void ShowNext()
+    {
+        this.labelNext.Visible = true;
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Presentation/Main.cs" type="Script" id=1]
 [ext_resource path="res://gd-achievements/AchievementList.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://gd-levelSelector/Levelbutton.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Presentation/MainCampfireFire.png" type="Texture" id=11]
 [ext_resource path="res://Presentation/MainCampfire.png" type="Texture" id=12]
+[ext_resource path="res://Presentation/GameRnd.tscn" type="PackedScene" id=13]
 
 [sub_resource type="TileSet" id=2]
 0/name = "MainBackground.png 0"
@@ -408,12 +409,14 @@ text = "25"
 align = 1
 
 [node name="StartGame99" parent="MenuLayer" instance=ExtResource( 6 )]
+visible = false
 margin_left = 256.0
 margin_top = 641.0
 margin_right = 320.0
 margin_bottom = 705.0
 texture_normal = ExtResource( 12 )
 GameToStart = ExtResource( 7 )
+NextLevelButton = NodePath("../StartGameRnd")
 
 [node name="AnimatedSprite99" type="AnimatedSprite" parent="MenuLayer/StartGame99"]
 position = Vector2( 34, 14 )
@@ -421,7 +424,7 @@ scale = Vector2( 0.796875, 0.75 )
 frames = SubResource( 63 )
 playing = true
 
-[node name="Line2D" type="Line2D" parent="MenuLayer/StartGame99"]
+[node name="Path99" type="Line2D" parent="MenuLayer/StartGame99"]
 position = Vector2( -258, -640 )
 points = PoolVector2Array( 128, 734, 261, 735, 276, 733, 284, 720, 284, 706 )
 width = 31.0
@@ -437,6 +440,39 @@ margin_bottom = 65.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 64 )
 text = "99"
+align = 1
+
+[node name="StartGameRnd" parent="MenuLayer" instance=ExtResource( 6 )]
+visible = false
+margin_left = 384.0
+margin_top = 512.0
+margin_right = 448.0
+margin_bottom = 576.0
+texture_normal = ExtResource( 12 )
+GameToStart = ExtResource( 13 )
+
+[node name="AnimatedSpriteRnd" type="AnimatedSprite" parent="MenuLayer/StartGameRnd"]
+position = Vector2( 34, 14 )
+scale = Vector2( 0.796875, 0.75 )
+frames = SubResource( 63 )
+playing = true
+
+[node name="PathRnd" type="Line2D" parent="MenuLayer/StartGameRnd"]
+position = Vector2( -258, -640 )
+points = PoolVector2Array( 163, 767, 163, 752, 179, 739, 196, 736, 261, 735, 276, 733, 284, 720, 284, 706 )
+width = 31.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 9 )
+texture_mode = 2
+
+[node name="TitleLabelRnd" type="Label" parent="MenuLayer/StartGameRnd"]
+margin_left = 20.0
+margin_top = 45.0
+margin_right = 42.0
+margin_bottom = 65.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 64 )
+text = "??"
 align = 1
 
 [node name="AchievementsButton" type="Button" parent="MenuLayer"]
