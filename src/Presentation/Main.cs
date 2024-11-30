@@ -12,11 +12,12 @@ public partial class Main
 
         // For debug purposes all achievements can be reset
         // this.di.localAchievementRepository.ResetAchievements();
-
+        var progress = this.di.repository.LoadProgress();
         this.achievementsButton.Connect(CommonSignals.Pressed, this, nameof(AchievementsButtonPressed));
         foreach (LevelButton b in this.GetTree().GetNodesInGroup(Groups.LevelButton))
         {
             b.Connect(CommonSignals.Pressed, this, nameof(GameStartButtonPressed), new Godot.Collections.Array { b });
+            b.Visible = b.Visible || progress.Contains(b.Name);
         }
     }
 
@@ -39,6 +40,8 @@ public partial class Main
             return;
         }
         nextLevel.Visible = true;
+
+        di.repository.SaveProgress(nextLevel.Name);
     }
 
     private void ExitGameClicked()

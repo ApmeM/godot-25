@@ -6,3 +6,4 @@ obj/
 *.import
 .vscode/
 *.user
+src/*.save
