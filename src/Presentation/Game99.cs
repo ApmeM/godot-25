@@ -28,6 +28,7 @@ public partial class Game99
             this.Data.Add(new DataContent
             {
                 ButtonValue = newValue,
+                HelpText = $"1...99",
                 Order = newValue
             });
         }

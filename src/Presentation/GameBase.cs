@@ -2,12 +2,10 @@ using Godot;
 using Godot25.Presentation.Utils;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 
 [SceneReference("GameBase.tscn")]
 public partial class GameBase
 {
-
     private int nextToClick = 0;
     private int NextToClick
     {
@@ -17,7 +15,7 @@ public partial class GameBase
             this.nextToClick = value;
             if (IsInsideTree() && this.Data.Count > this.NextToClick && !string.IsNullOrWhiteSpace(this.Data[this.NextToClick].HelpText))
             {
-                this.labelNext.Text = $"Next: {this.Data[this.NextToClick].HelpText}";
+                this.labelNext.Text = $"Find: {this.Data[this.NextToClick].HelpText}";
             }
         }
     }
@@ -44,12 +42,12 @@ public partial class GameBase
         this.FillMembers();
 
         InitButtons();
+        this.NextToClick = 0;
         foreach (GameButton b in this.gameField.GetChildren())
         {
             b.Connect(nameof(GameButton.Clicked), this, nameof(GameButtonPressed));
         }
 
-        this.labelNext.Visible = false;
         this.restartGame.Visible = false;
         this.exitGame.Connect(CommonSignals.Pressed, this, nameof(ExitGameClicked));
         this.startGame.Connect(CommonSignals.Pressed, this, nameof(GameStartButtonPressed));
@@ -156,10 +154,5 @@ public partial class GameBase
             var k = r.Next(n + 1);
             (list[n], list[k]) = (list[k], list[n]);
         }
-    }
-
-    public void ShowNext()
-    {
-        this.labelNext.Visible = true;
     }
 }

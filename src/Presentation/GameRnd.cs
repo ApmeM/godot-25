@@ -9,7 +9,6 @@ public partial class GameRnd
     {
         base._Ready();
         this.FillMembers();
-        base.ShowNext();
     }
     
     private Random r = new Random();

@@ -56,7 +56,6 @@ margin_top = 110.0
 margin_right = 440.0
 margin_bottom = 149.0
 custom_fonts/font = SubResource( 1 )
-text = "Next:"
 align = 1
 
 [node name="GameFieldContainer" type="MarginContainer" parent="."]
