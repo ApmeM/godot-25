@@ -17,8 +17,8 @@ public partial class Game25
             var newValue = j + 1;
             this.Data.Add(new DataContent
             {
-                Text = newValue.ToString(),
-                Value = newValue
+                ButtonValue = newValue,
+                Order = newValue
             });
         }
     }

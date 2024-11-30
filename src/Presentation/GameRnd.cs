@@ -28,8 +28,9 @@ public partial class GameRnd
             set.Add(newValue);
             this.Data.Add(new DataContent
             {
-                Text = newValue.ToString(),
-                Value = j
+                ButtonValue = newValue,
+                HelpText = newValue.ToString(),
+                Order = j
             });
         }
     }

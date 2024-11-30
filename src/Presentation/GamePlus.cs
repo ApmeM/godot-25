@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-[SceneReference("Game99.tscn")]
-public partial class Game99
+[SceneReference("GamePlus.tscn")]
+public partial class GamePlus
 {
     public override void _Ready()
     {
         base._Ready();
         this.FillMembers();
+        base.ShowNext();
     }
 
     private Random r = new Random();
@@ -25,10 +26,15 @@ public partial class Game99
                 newValue = r.Next(99) + 1;
             }
             set.Add(newValue);
+
+            var arg1 = r.Next(newValue - 1) + 1;
+            var arg2 = newValue - arg1;
+
             this.Data.Add(new DataContent
             {
                 ButtonValue = newValue,
-                Order = newValue
+                HelpText = $"{arg1}+{arg2}=?",
+                Order = j
             });
         }
     }

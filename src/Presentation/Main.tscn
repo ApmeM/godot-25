@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://Presentation/Main.cs" type="Script" id=1]
 [ext_resource path="res://gd-achievements/AchievementList.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Presentation/MainCampfireFire.png" type="Texture" id=11]
 [ext_resource path="res://Presentation/MainCampfire.png" type="Texture" id=12]
 [ext_resource path="res://Presentation/GameRnd.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Presentation/GamePlus.tscn" type="PackedScene" id=14]
 
 [sub_resource type="TileSet" id=2]
 0/name = "MainBackground.png 0"
@@ -450,6 +451,7 @@ margin_right = 448.0
 margin_bottom = 576.0
 texture_normal = ExtResource( 12 )
 GameToStart = ExtResource( 13 )
+NextLevelButton = NodePath("../StartGamePlus")
 
 [node name="AnimatedSpriteRnd" type="AnimatedSprite" parent="MenuLayer/StartGameRnd"]
 position = Vector2( 34, 14 )
@@ -473,6 +475,39 @@ margin_bottom = 65.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 64 )
 text = "??"
+align = 1
+
+[node name="StartGamePlus" parent="MenuLayer" instance=ExtResource( 6 )]
+visible = false
+margin_left = 257.0
+margin_top = 385.0
+margin_right = 320.0
+margin_bottom = 448.0
+texture_normal = ExtResource( 12 )
+GameToStart = ExtResource( 14 )
+
+[node name="AnimatedSpritePlus" type="AnimatedSprite" parent="MenuLayer/StartGamePlus"]
+position = Vector2( 34, 14 )
+scale = Vector2( 0.796875, 0.75 )
+frames = SubResource( 63 )
+playing = true
+
+[node name="PathPlus" type="Line2D" parent="MenuLayer/StartGamePlus"]
+position = Vector2( -258, -640 )
+points = PoolVector2Array( 418, 766, 419, 697, 417, 686, 413, 679, 403, 672, 386, 671, 322, 671 )
+width = 31.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 9 )
+texture_mode = 2
+
+[node name="TitleLabelPlus" type="Label" parent="MenuLayer/StartGamePlus"]
+margin_left = 20.0
+margin_top = 45.0
+margin_right = 42.0
+margin_bottom = 65.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 64 )
+text = "+"
 align = 1
 
 [node name="AchievementsButton" type="Button" parent="MenuLayer"]

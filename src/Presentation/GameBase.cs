@@ -7,7 +7,20 @@ using System.Runtime.Remoting.Messaging;
 [SceneReference("GameBase.tscn")]
 public partial class GameBase
 {
-    private int nextToClick;
+
+    private int nextToClick = 0;
+    private int NextToClick
+    {
+        get => this.nextToClick;
+        set
+        {
+            this.nextToClick = value;
+            if (IsInsideTree() && this.Data.Count > this.NextToClick && !string.IsNullOrWhiteSpace(this.Data[this.NextToClick].HelpText))
+            {
+                this.labelNext.Text = $"Next: {this.Data[this.NextToClick].HelpText}";
+            }
+        }
+    }
     private DateTime? startedDate;
 
     [Signal]
@@ -18,8 +31,9 @@ public partial class GameBase
 
     protected struct DataContent
     {
-        public string Text;
-        public int Value;
+        public string HelpText;
+        public int ButtonValue;
+        public int Order;
     }
 
     protected readonly List<DataContent> Data = new List<DataContent>();
@@ -56,13 +70,12 @@ public partial class GameBase
         var i = 0;
         foreach (GameButton b in this.gameField.GetChildren())
         {
-            b.Value = Data[i % Data.Count].Value;
-            b.Text = Data[i % Data.Count].Text;
+            b.Value = Data[i % Data.Count].ButtonValue;
             b.Disabled = false;
             i++;
         }
 
-        this.Data.Sort((a, b) => a.Value - b.Value);
+        this.Data.Sort((a, b) => a.Order - b.Order);
     }
 
     protected virtual void InitData()
@@ -81,8 +94,7 @@ public partial class GameBase
         this.hoverContainer.Visible = false;
 
         InitButtons();
-        nextToClick = 0;
-        this.labelNext.Text = $"Next: {this.Data[this.nextToClick].Text}";
+        NextToClick = 0;
         startedDate = DateTime.Now;
     }
 
@@ -102,39 +114,36 @@ public partial class GameBase
             return;
         }
 
-        if (this.Data[this.nextToClick].Value != button.Value)
+        if (this.Data[this.NextToClick].ButtonValue != button.Value)
         {
             button.Shake();
             return;
         }
 
         button.Disabled = true;
-        this.nextToClick++;
+        this.NextToClick++;
 
-        if (nextToClick < 25)
+        if (NextToClick >= 25)
         {
-            this.labelNext.Text = $"Next: {this.Data[this.nextToClick].Text}";
-            return;
-        }
+            var finalScore = DateTime.Now - startedDate.Value;
+            startedDate = null;
+            this.finalTime.Text = "Your time:\n" + finalScore.ToString(@"hh\:mm\:ss"); ;
 
-        var finalScore = DateTime.Now - startedDate.Value;
-        startedDate = null;
-        this.finalTime.Text = "Your time:\n" + finalScore.ToString(@"hh\:mm\:ss"); ;
+            var bestScore = di.repository.LoadGame(this.GetType().Name);
+            if (bestScore > finalScore)
+            {
+                di.repository.SaveGame(this.GetType().Name, finalScore);
+                this.finalTime.Text += "\nNEW BEST!!!";
+            }
+            else
+            {
+                this.finalTime.Text += "\nBest time:\n" + bestScore.ToString(@"hh\:mm\:ss"); ;
+            }
 
-        var bestScore = di.repository.LoadGame(this.GetType().Name);
-        if (bestScore > finalScore)
-        {
-            di.repository.SaveGame(this.GetType().Name, finalScore);
-            this.finalTime.Text += "\nNEW BEST!!!";
+            this.time.Text = "";
+            this.hoverContainer.Visible = true;
+            this.EmitSignal(nameof(LevelPassed));
         }
-        else
-        {
-            this.finalTime.Text += "\nBest time:\n" + bestScore.ToString(@"hh\:mm\:ss"); ;
-        }
-
-        this.time.Text = "";
-        this.hoverContainer.Visible = true;
-        this.EmitSignal(nameof(LevelPassed));
     }
 
     private readonly Random r = new Random();
