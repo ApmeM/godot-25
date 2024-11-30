@@ -103,8 +103,21 @@ public partial class GameBase
 
         if (nextToClick == 25)
         {
+            var finalScore = DateTime.Now - startedDate.Value;
             startedDate = null;
-            this.finalTime.Text = "Your time:\n" + this.time.Text;
+            this.finalTime.Text = "Your time:\n" + finalScore.ToString(@"hh\:mm\:ss"); ;
+
+            var bestScore = di.repository.LoadGame(this.GetType().Name);
+            if (bestScore > finalScore)
+            {
+                di.repository.SaveGame(this.GetType().Name, finalScore);
+                this.finalTime.Text += "\nNEW BEST!!!";
+            }
+            else
+            {
+                this.finalTime.Text += "\nBest time:\n" + bestScore.ToString(@"hh\:mm\:ss"); ;
+            }
+
             this.time.Text = "";
             this.hoverContainer.Visible = true;
             this.EmitSignal(nameof(LevelPassed));
