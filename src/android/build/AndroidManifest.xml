@@ -28,6 +28,10 @@
     <!-- WARNING: This should stay on a single line until the parsing code is improved. See GH-32414. -->
     <application android:label="@string/godot_project_name_string" android:allowBackup="false" android:isGame="true" android:hasFragileUserData="false" android:requestLegacyExternalStorage="false" tools:ignore="GoogleAppIndexingWarning" android:icon="@mipmap/icon" >
 
+        <meta-data 
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="38002705074"/>
+
         <!-- Records the version of the Godot editor used for building -->
         <meta-data
             android:name="org.godotengine.editor.version"
