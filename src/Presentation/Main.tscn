@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://Presentation/Main.cs" type="Script" id=1]
 [ext_resource path="res://gd-achievements/AchievementList.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Presentation/GameRnd.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Presentation/GamePlus.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Presentation/GameMult.tscn" type="PackedScene" id=15]
+[ext_resource path="res://gd-googlePlay/GodotPlayGameService.tscn" type="PackedScene" id=16]
 
 [sub_resource type="TileSet" id=2]
 0/name = "MainBackground.png 0"
@@ -615,5 +616,7 @@ margin_bottom = 368.0
 margin_left = 273.0
 margin_right = 282.0
 margin_bottom = 395.0
+
+[node name="GodotPlayGameService" parent="." instance=ExtResource( 16 )]
 
 [editable path="MenuLayer/CustomPopup"]
