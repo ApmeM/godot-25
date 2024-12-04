@@ -1,10 +1,20 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 using Godot25.Presentation.Utils;
 
 [SceneReference("Main.tscn")]
 public partial class Main
 {
+
+    public Dictionary<string, string> buttonToAchievementMap = new Dictionary<string, string>{
+        {"StartGame25", "CgkIsoWNyY0BEAIQAQ"},
+        {"StartGame99", "CgkIsoWNyY0BEAIQAg"},
+        {"StartGameRnd", "CgkIsoWNyY0BEAIQAw"},
+        {"StartGamePlus", "CgkIsoWNyY0BEAIQBA"},
+        {"StartGameMult", "CgkIsoWNyY0BEAIQBQ"},
+    };
+
     public override void _Ready()
     {
         base._Ready();
@@ -35,6 +45,11 @@ public partial class Main
     private void LevelPassed(LevelButton button)
     {
         var nextLevel = button.GetNextLevel();
+        if (buttonToAchievementMap.ContainsKey(button.Name))
+        {
+            this.googlePlay.UnlockAchievement(buttonToAchievementMap[button.Name]);
+        }
+
         if (nextLevel == null)
         {
             return;

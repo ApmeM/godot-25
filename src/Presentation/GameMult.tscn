@@ -3,5 +3,5 @@
 [ext_resource path="res://Presentation/GameBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Presentation/GameMult.cs" type="Script" id=2]
 
-[node name="Game25" instance=ExtResource( 1 )]
+[node name="GameMult" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

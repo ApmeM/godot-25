@@ -617,6 +617,6 @@ margin_left = 273.0
 margin_right = 282.0
 margin_bottom = 395.0
 
-[node name="GodotPlayGameService" parent="." instance=ExtResource( 16 )]
+[node name="GooglePlay" parent="." instance=ExtResource( 16 )]
 
 [editable path="MenuLayer/CustomPopup"]
