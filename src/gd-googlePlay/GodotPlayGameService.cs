@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 [SceneReference("GodotPlayGameService.tscn")]
@@ -7,7 +6,6 @@ public partial class GodotPlayGameService
     // Represents the Android plugin for the GodotPlayGameService.
     public Godot.Object Plugin { get; private set; }
     const string plugin_name1 = "GodotPlayGameServices";
-    const string plugin_name2 = "GodotGooglePlayGameServices";
 
     public override void _Ready()
     {
@@ -16,11 +14,6 @@ public partial class GodotPlayGameService
             if (Engine.HasSingleton(plugin_name1))
             {
                 Plugin = Engine.GetSingleton(plugin_name1);
-                Plugin.Call("initialize");
-            }
-            else if (Engine.HasSingleton(plugin_name2))
-            {
-                Plugin = Engine.GetSingleton(plugin_name2);
                 Plugin.Call("initialize");
             }
             else
