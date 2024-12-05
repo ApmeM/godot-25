@@ -6,7 +6,6 @@ obj/
 *.import
 .vscode/
 *.user
-src/*.save
 src/android/build/assets/
 src/android/build/build/
 src/android/build/.gradle/

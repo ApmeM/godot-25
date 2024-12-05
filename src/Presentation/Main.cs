@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 using Godot25.Presentation.Utils;
@@ -6,7 +5,6 @@ using Godot25.Presentation.Utils;
 [SceneReference("Main.tscn")]
 public partial class Main
 {
-
     public Dictionary<string, string> buttonToAchievementMap = new Dictionary<string, string>{
         {"StartGame25", "CgkIsoWNyY0BEAIQAQ"},
         {"StartGame99", "CgkIsoWNyY0BEAIQAg"},
