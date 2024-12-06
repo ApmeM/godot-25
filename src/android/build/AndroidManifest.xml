@@ -30,7 +30,7 @@
 
         <meta-data 
             android:name="com.google.android.gms.games.APP_ID"
-            android:value="38002705074"/>
+            android:value="@string/app_id"/>
 
         <!-- Records the version of the Godot editor used for building -->
         <meta-data
