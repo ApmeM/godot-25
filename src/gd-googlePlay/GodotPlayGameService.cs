@@ -5,7 +5,7 @@ public partial class GodotPlayGameService
 {
     // Represents the Android plugin for the GodotPlayGameService.
     public Godot.Object Plugin { get; private set; }
-    const string plugin_name1 = "GodotPlayGameServices";
+    const string plugin_name1 = "GodotGooglePlayGameServices";
 
     public override void _Ready()
     {
