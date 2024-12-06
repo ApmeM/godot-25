@@ -8,5 +8,4 @@ font_data = ExtResource( 2 )
 
 [node name="GodotPlayGameService" type="Label"]
 custom_fonts/font = SubResource( 1 )
-text = "test"
 script = ExtResource( 1 )

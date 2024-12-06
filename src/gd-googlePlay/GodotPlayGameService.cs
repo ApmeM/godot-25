@@ -5,28 +5,21 @@ public partial class GodotPlayGameService
 {
     // Represents the Android plugin for the GodotPlayGameService.
     public Godot.Object Plugin { get; private set; }
-    const string plugin_name1 = "GodotPlayGameServices";
-    const string plugin_name2 = "GodotGooglePlayGameServices";
+    const string plugin_name = "GodotGooglePlayGameServices";
 
     public override void _Ready()
     {
         if (Plugin == null)
         {
-            if (Engine.HasSingleton(plugin_name1))
+            if (Engine.HasSingleton(plugin_name))
             {
-                Plugin = Engine.GetSingleton(plugin_name1);
+                Plugin = Engine.GetSingleton(plugin_name);
                 Plugin.Call("initialize");
-                this.Text = "Plugin 1 found\n";
-            }
-            else if (Engine.HasSingleton(plugin_name2))
-            {
-                Plugin = Engine.GetSingleton(plugin_name2);
-                Plugin.Call("initialize");
-                this.Text = "Plugin 2 found\n";
+                SignIn();
             }
             else
             {
-                this.Text = "No plugin found.\n";
+                GD.PrintErr("No plugin found.");
             }
         }
 
@@ -40,27 +33,27 @@ public partial class GodotPlayGameService
 
     private void UserAuthenticated(bool isAuthenticated)
     {
-        this.Text += "UserAuthenticated\n";
+        this.Text += $"UserAuthenticated: {isAuthenticated}\n";
     }
 
     private void ServerSideAccessRequested(bool isAuthenticated)
     {
-        this.Text += "ServerSideAccessRequested\n";
+        this.Text += $"ServerSideAccessRequested: {isAuthenticated}\n";
     }
 
     private void AchievementUnlocked(bool isUnlocked, string achievementId)
     {
-        this.Text += "AchievementUnlocked\n";
+        this.Text += $"AchievementUnlocked: {isUnlocked} achievement: {achievementId}\n";
     }
 
     private void AchievementsLoaded(string json)
     {
-        this.Text += "AchievementsLoaded\n";
+        this.Text += $"AchievementsLoaded: {json}\n";
     }
 
     private void AchievementRevealed(bool isRevealed, string achievementId)
     {
-        this.Text += "AchievementRevealed\n";
+        this.Text += $"AchievementRevealed {isRevealed} {achievementId}\n";
     }
 
 
