@@ -5,7 +5,8 @@ public partial class GodotPlayGameService
 {
     // Represents the Android plugin for the GodotPlayGameService.
     public Godot.Object Plugin { get; private set; }
-    const string plugin_name1 = "GodotGooglePlayGameServices";
+    const string plugin_name1 = "GodotPlayGameServices";
+    const string plugin_name2 = "GodotGooglePlayGameServices";
 
     public override void _Ready()
     {
@@ -15,10 +16,17 @@ public partial class GodotPlayGameService
             {
                 Plugin = Engine.GetSingleton(plugin_name1);
                 Plugin.Call("initialize");
+                this.Text = "Plugin 1 found\n";
+            }
+            else if (Engine.HasSingleton(plugin_name2))
+            {
+                Plugin = Engine.GetSingleton(plugin_name2);
+                Plugin.Call("initialize");
+                this.Text = "Plugin 2 found\n";
             }
             else
             {
-                GD.PrintErr("No plugin found.");
+                this.Text = "No plugin found.\n";
             }
         }
 
@@ -32,22 +40,27 @@ public partial class GodotPlayGameService
 
     private void UserAuthenticated(bool isAuthenticated)
     {
+        this.Text += "UserAuthenticated\n";
     }
 
     private void ServerSideAccessRequested(bool isAuthenticated)
     {
+        this.Text += "ServerSideAccessRequested\n";
     }
 
     private void AchievementUnlocked(bool isUnlocked, string achievementId)
     {
+        this.Text += "AchievementUnlocked\n";
     }
 
     private void AchievementsLoaded(string json)
     {
+        this.Text += "AchievementsLoaded\n";
     }
 
     private void AchievementRevealed(bool isRevealed, string achievementId)
     {
+        this.Text += "AchievementRevealed\n";
     }
 
 
