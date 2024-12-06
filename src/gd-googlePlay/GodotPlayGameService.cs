@@ -27,11 +27,11 @@ public partial class GodotPlayGameService
         }
 
         // Connects signals from the AndroidPlugin instance to corresponding methods
-        Plugin?.Connect("userAuthenticated", this, nameof(UserAuthenticated));
-        Plugin?.Connect("serverSideAccessRequested", this, nameof(ServerSideAccessRequested));
-        Plugin?.Connect("achievementUnlocked", this, nameof(AchievementUnlocked));
-        Plugin?.Connect("achievementsLoaded", this, nameof(AchievementsLoaded));
-        Plugin?.Connect("achievementRevealed", this, nameof(AchievementRevealed));
+        // Plugin?.Connect("userAuthenticated", this, nameof(UserAuthenticated));
+        // Plugin?.Connect("serverSideAccessRequested", this, nameof(ServerSideAccessRequested));
+        // Plugin?.Connect("achievementUnlocked", this, nameof(AchievementUnlocked));
+        // Plugin?.Connect("achievementsLoaded", this, nameof(AchievementsLoaded));
+        // Plugin?.Connect("achievementRevealed", this, nameof(AchievementRevealed));
     }
 
     private void UserAuthenticated(bool isAuthenticated)
@@ -60,6 +60,10 @@ public partial class GodotPlayGameService
     }
 
 
+    public bool IsEnabled()
+    {
+        return Plugin != null;
+    }
 
     public void IsAuthenticated()
     {

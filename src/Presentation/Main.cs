@@ -66,8 +66,15 @@ public partial class Main
 
     private void AchievementsButtonPressed()
     {
-        // See achievements definitions in gd-achievements/achievements.json
-        this.achievementList.ReloadList();
-        this.customPopup.Show();
+        if (this.googlePlay.IsEnabled())
+        {
+            this.googlePlay.ShowAchievements();
+        }
+        else
+        {
+            // See achievements definitions in gd-achievements/achievements.json
+            this.achievementList.ReloadList();
+            this.customPopup.Show();
+        }
     }
 }
