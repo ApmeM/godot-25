@@ -138,7 +138,7 @@ namespace Godot25.Achievements
 
             if (!userFileJson.FileExists(ACHIEVEMENTS_DATA))
             {
-                GD.PrintErr("Achievement System: Can't open achievements data. It doesn't exists on device");
+                GD.Print("Achievement System: Can't open achievements data. It doesn't exists on device. Recreating.");
             }
 
             var data = achievements.ToDictionary(a => a.Key, a => ToData(a.Value));
@@ -177,7 +177,7 @@ namespace Godot25.Achievements
             var file = new File();
             if (!file.FileExists(ACHIEVEMENTS_DATA))
             {
-                GD.PrintErr("Achievement System: Can't open achievements data. It doesn't exists on device");
+                GD.Print("Achievement System: Can't open achievements data. It doesn't exists on device. Recreating.");
                 return new Dictionary<string, UserAchievement>();
             }
 

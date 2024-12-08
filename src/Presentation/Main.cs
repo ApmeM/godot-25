@@ -45,9 +45,14 @@ public partial class Main
         var nextLevel = button.GetNextLevel();
         if (buttonToAchievementMap.ContainsKey(button.Name))
         {
+            var achievement = buttonToAchievementMap[button.Name];
             if (this.googlePlay.IsEnabled())
             {
-                this.googlePlay.achievementsUnlock(buttonToAchievementMap[button.Name], true);
+                this.googlePlay.achievementsUnlock(achievement, true);
+            }
+            else
+            {
+                this.achievementNotifications.UnlockAchievement(achievement);
             }
         }
 

@@ -46,43 +46,6 @@ public partial class GodotPlayGameService
         }
     }
 
-    public void Debug()
-    {
-        try
-        {
-            GD.Print($"ARTEM: Plugin: {Plugin}");
-            GD.Print($"ARTEM: PluginType: {Plugin.GetType()}");
-            var singleton = (JNISingleton)Plugin;
-            GD.Print($"ARTEM: Signals:");
-            foreach (var signal in singleton.GetSignalList())
-            {
-                var dict = (Godot.Collections.Dictionary)signal;
-                var args = ((Godot.Collections.Array)dict["args"]).Cast<Godot.Collections.Dictionary>().ToList();
-                GD.Print($"ARTEM: {dict["name"]} ({string.Join(", ", args.Select(a => $"{a["type"]} {a["name"]}"))})");
-            }
-
-            GD.Print($"ARTEM: Methods:");
-            foreach (var signal in singleton.GetMethodList())
-            {
-                var dict = (Godot.Collections.Dictionary)signal;
-                var retu = (Godot.Collections.Dictionary)dict["return"];
-                var args = ((Godot.Collections.Array)dict["args"]).Cast<Godot.Collections.Dictionary>().ToList();
-                GD.Print($"ARTEM: {retu["type"]} {dict["name"]} ({string.Join(", ", args.Select(a => $"{a["type"]} {a["name"]}"))})");
-            }
-            GD.Print($"ARTEM: Properties:");
-            foreach (var signal in singleton.GetPropertyList())
-            {
-                var dict = (Godot.Collections.Dictionary)signal;
-                GD.Print($"ARTEM: {dict["type"]} {dict["name"]}");
-            }
-        }
-        catch (Exception ex)
-        {
-            GD.Print($"ARTEM: {ex}");
-        }
-    }
-
-
     public bool IsEnabled()
     {
         return Plugin != null;

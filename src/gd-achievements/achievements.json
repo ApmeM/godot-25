@@ -1,7 +1,27 @@
 {
-  "MyFirstAchievement": {
-    "name": "First chievement",
-    "description": "Congratulations! You unlock your first achievement",
-    "icon_path": "res://gd-achievements/resources/achievement_locked.png"
+  "CgkIsoWNyY0BEAIQAQ": {
+    "name": "I know numbers",
+    "description": "Win the first game (count 1 to 25)",
+    "icon_path": "res://Presentation/icon.png"
+  },
+  "CgkIsoWNyY0BEAIQAg": {
+    "name": "I can count",
+    "description": "Win second game (count 1..99)",
+    "icon_path": "res://Presentation/icon.png"
+  },
+  "CgkIsoWNyY0BEAIQAw": {
+    "name": "Sharp eye",
+    "description": "Win third game (find specific number)",
+    "icon_path": "res://Presentation/icon.png"
+  },
+  "CgkIsoWNyY0BEAIQBA": {
+    "name": "Math is easy",
+    "description": "Win fourth game (add up numbers)",
+    "icon_path": "res://Presentation/icon.png"
+  },
+  "CgkIsoWNyY0BEAIQBQ": {
+    "name": "I finished 3rd grade",
+    "description": "Win fifth game (multiplication table)",
+    "icon_path": "res://Presentation/icon.png"
   }
 }
