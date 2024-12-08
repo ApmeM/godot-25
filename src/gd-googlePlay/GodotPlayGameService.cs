@@ -1,9 +1,28 @@
+using System;
+using System.Linq;
 using Godot;
 
 [SceneReference("GodotPlayGameService.tscn")]
 public partial class GodotPlayGameService
 {
-    // Represents the Android plugin for the GodotPlayGameService.
+    ///  <summary>
+    /// Represents the Android plugin for the GodotPlayGameService.
+    /// Tried alternatives: 
+    /// 1. https://github.com/cgisca/PGSGP
+    /// JNI DETECTED ERROR IN APPLICATION: JNI CallVoidMethodA called with pending exception java.lang.ClassCastException: org.godotengine.godot.Godot cannot be cast to android.app.Activity
+    ///   at void io.cgisca.godot.gpgs.PlayGameServicesGodot.initialize(boolean, boolean, java.lang.String) (PlayGameServicesGodot.kt:185)
+    ///   at void io.cgisca.godot.gpgs.PlayGameServicesGodot.init(boolean) (PlayGameServicesGodot.kt:168)
+    ///   
+    /// 2. https://github.com/Kopfenheim/godot-gpgs
+    /// Too complext installation (Recompile the Godot source for android).
+    /// 
+    /// 3. https://github.com/godot-sdk-integrations/godot-play-game-services
+    /// For godot 4
+    /// 
+    /// 4. https://github.com/Iakobs/godot-google-play-game-services-android-plugin
+    /// This implementation
+    /// 
+    /// </summary>
     public Godot.Object Plugin { get; private set; }
     const string plugin_name = "GodotGooglePlayGameServices";
 
@@ -11,6 +30,7 @@ public partial class GodotPlayGameService
     {
         if (Plugin == null)
         {
+            // if this pat is not working - check godot export settings and enable plugin.
             if (Engine.HasSingleton(plugin_name))
             {
                 // For debug connection do:
@@ -18,45 +38,48 @@ public partial class GodotPlayGameService
                 // logcat | grep "APP NOT CORRECTLY CONFIGURED TO USE GOOGLE PLAY GAME SERVICES"
                 Plugin = Engine.GetSingleton(plugin_name);
                 Plugin.Call("initialize");
-                SignIn();
             }
             else
             {
                 GD.PrintErr("No plugin found.");
             }
         }
-
-        // Connects signals from the AndroidPlugin instance to corresponding methods
-        // Plugin?.Connect("userAuthenticated", this, nameof(UserAuthenticated));
-        // Plugin?.Connect("serverSideAccessRequested", this, nameof(ServerSideAccessRequested));
-        // Plugin?.Connect("achievementUnlocked", this, nameof(AchievementUnlocked));
-        // Plugin?.Connect("achievementsLoaded", this, nameof(AchievementsLoaded));
-        // Plugin?.Connect("achievementRevealed", this, nameof(AchievementRevealed));
     }
 
-    private void UserAuthenticated(bool isAuthenticated)
+    public void Debug()
     {
-        this.Text += $"UserAuthenticated: {isAuthenticated}\n";
-    }
+        try
+        {
+            GD.Print($"ARTEM: Plugin: {Plugin}");
+            GD.Print($"ARTEM: PluginType: {Plugin.GetType()}");
+            var singleton = (JNISingleton)Plugin;
+            GD.Print($"ARTEM: Signals:");
+            foreach (var signal in singleton.GetSignalList())
+            {
+                var dict = (Godot.Collections.Dictionary)signal;
+                var args = ((Godot.Collections.Array)dict["args"]).Cast<Godot.Collections.Dictionary>().ToList();
+                GD.Print($"ARTEM: {dict["name"]} ({string.Join(", ", args.Select(a => $"{a["type"]} {a["name"]}"))})");
+            }
 
-    private void ServerSideAccessRequested(bool isAuthenticated)
-    {
-        this.Text += $"ServerSideAccessRequested: {isAuthenticated}\n";
-    }
-
-    private void AchievementUnlocked(bool isUnlocked, string achievementId)
-    {
-        this.Text += $"AchievementUnlocked: {isUnlocked} achievement: {achievementId}\n";
-    }
-
-    private void AchievementsLoaded(string json)
-    {
-        this.Text += $"AchievementsLoaded: {json}\n";
-    }
-
-    private void AchievementRevealed(bool isRevealed, string achievementId)
-    {
-        this.Text += $"AchievementRevealed {isRevealed} {achievementId}\n";
+            GD.Print($"ARTEM: Methods:");
+            foreach (var signal in singleton.GetMethodList())
+            {
+                var dict = (Godot.Collections.Dictionary)signal;
+                var retu = (Godot.Collections.Dictionary)dict["return"];
+                var args = ((Godot.Collections.Array)dict["args"]).Cast<Godot.Collections.Dictionary>().ToList();
+                GD.Print($"ARTEM: {retu["type"]} {dict["name"]} ({string.Join(", ", args.Select(a => $"{a["type"]} {a["name"]}"))})");
+            }
+            GD.Print($"ARTEM: Properties:");
+            foreach (var signal in singleton.GetPropertyList())
+            {
+                var dict = (Godot.Collections.Dictionary)signal;
+                GD.Print($"ARTEM: {dict["type"]} {dict["name"]}");
+            }
+        }
+        catch (Exception ex)
+        {
+            GD.Print($"ARTEM: {ex}");
+        }
     }
 
 
@@ -65,43 +88,182 @@ public partial class GodotPlayGameService
         return Plugin != null;
     }
 
-    public void IsAuthenticated()
+    // Plugin methods are taken from https://github.com/Iakobs/godot-google-play-game-services-android-plugin/blob/main/app/src/main/java/com/jacobibanez/godot/gpgs/GodotGooglePlayGameServices.kt
+    // Plugin signals are taken from https://github.com/Iakobs/godot-google-play-game-services-android-plugin/blob/main/app/src/main/java/com/jacobibanez/godot/gpgs/signals/Signals.kt
+
+    #region Initialize
+    public void initialize()
     {
-        Plugin?.Call("isAuthenticated");
+        Plugin.Call("initialize");
+    }
+    #endregion
+
+    #region Achievements
+
+    public void achievementsIncrement(string achievementId, int amount, bool immediate)
+    {
+        Plugin.Call("achievementsIncrement", achievementId, amount, immediate);
+    }
+    public void achievementsLoad(bool forceReload)
+    {
+        Plugin.Call("achievementsLoad", forceReload);
+    }
+    public void achievementsReveal(string achievementId, bool immediate)
+    {
+        Plugin.Call("achievementsReveal", achievementId, immediate);
+    }
+    public void achievementsSetSteps(string achievementId, int amount, bool immediate)
+    {
+        Plugin.Call("achievementsSetSteps", achievementId, amount, immediate);
+    }
+    public void achievementsShow()
+    {
+        Plugin.Call("achievementsShow");
+    }
+    public void achievementsUnlock(string achievementId, bool immediate)
+    {
+        Plugin.Call("achievementsUnlock", achievementId, immediate);
     }
 
-    public void SignIn()
+    #endregion
+
+    #region Events
+
+    public void eventsIncrement(string eventId, int amount)
     {
-        Plugin?.Call("signIn");
+        Plugin.Call("eventsIncrement", eventId, amount);
     }
 
-    public void RequestServerSideAccess(string serverClientId, bool forceRefreshToken)
+    public void eventsLoad(bool forceReload)
     {
-        Plugin?.Call("requestServerSideAccess", serverClientId, forceRefreshToken);
+        Plugin.Call("eventsLoad", forceReload);
     }
 
-    public void IncrementAchievement(string achievementId, int amount)
+    public void eventsLoadByIds(bool forceReload, string[] eventIds)
     {
-        Plugin?.Call("incrementAchievement", achievementId, amount);
+        // Type might be wrong, need to check
+        Plugin.Call("eventsLoadByIds", forceReload, eventIds);
     }
 
-    public void LoadAchievements(bool forceReload)
+    #endregion
+
+    #region Leaderboards
+
+    public void leaderboardsShowAll()
     {
-        Plugin?.Call("loadAchievements", forceReload);
+        Plugin.Call("leaderboardsShowAll");
     }
 
-    public void RevealAchievement(string achievementId)
+    public void leaderboardsShow(string leaderboardId)
     {
-        Plugin?.Call("revealAchievement", achievementId);
+        Plugin.Call("leaderboardsShow", leaderboardId);
     }
 
-    public void ShowAchievements()
+    public void leaderboardsShowForTimeSpan(string leaderboardId, int timeSpan)
     {
-        Plugin?.Call("showAchievements");
+        Plugin.Call("leaderboardsShowForTimeSpan", leaderboardId, timeSpan);
     }
 
-    public void UnlockAchievement(string achievementId)
+    public void leaderboardsShowForTimeSpanAndCollection(string leaderboardId, int timeSpan, int collection)
     {
-        Plugin?.Call("unlockAchievement", achievementId);
+        Plugin.Call("leaderboardsShowForTimeSpanAndCollection", leaderboardId, timeSpan, collection);
     }
+
+    public void leaderboardsSubmitScore(string leaderboardId, float score)
+    {
+        Plugin.Call("leaderboardsSubmitScore", leaderboardId, score);
+    }
+
+    public void leaderboardsLoadPlayerScore(string leaderboardId, int timeSpan, int collection)
+    {
+        Plugin.Call("leaderboardsLoadPlayerScore", leaderboardId, timeSpan, collection);
+    }
+
+    public void leaderboardsLoadAll(bool forceReload)
+    {
+        Plugin.Call("leaderboardsLoadAll", forceReload);
+    }
+
+    public void leaderboardsLoad(string leaderboardId, bool forceReload)
+    {
+        Plugin.Call("leaderboardsLoad", leaderboardId, forceReload);
+    }
+
+    public void leaderboardsLoadPlayerCenteredScores(string leaderboardId, int timeSpan, int collection, int maxResults, bool forceReload)
+    {
+        Plugin.Call("leaderboardsLoadPlayerCenteredScores", leaderboardId, timeSpan, collection, maxResults, forceReload);
+    }
+
+    public void leaderboardsLoadTopScores(string leaderboardId, int timeSpan, int collection, int maxResults, bool forceReload)
+    {
+        Plugin.Call("leaderboardsLoadTopScores", leaderboardId, timeSpan, collection, maxResults, forceReload);
+    }
+
+    #endregion
+
+    #region Players
+
+    public void playersCompareProfile(string otherPlayerId)
+    {
+        Plugin.Call("playersCompareProfile", otherPlayerId);
+    }
+
+    public void playersCompareProfileWithAlternativeNameHints(string otherPlayerId, string otherPlayerInGameName, string currentPlayerInGameName)
+    {
+        Plugin.Call("playersCompareProfileWithAlternativeNameHints", otherPlayerId, otherPlayerInGameName, currentPlayerInGameName);
+    }
+
+    public void playersLoadCurrent(bool forceReload)
+    {
+        Plugin.Call("playersLoadCurrent", forceReload);
+    }
+
+    public void playersLoadFriends(int pageSize, bool forceReload, bool askForPermission)
+    {
+        Plugin.Call("playersLoadFriends", pageSize, forceReload, askForPermission);
+    }
+
+    public void playersSearch()
+    {
+        Plugin.Call("playersSearch");
+    }
+
+    #endregion
+
+    #region SignIn 
+
+    public void signInIsAuthenticated()
+    {
+        Plugin.Call("signInIsAuthenticated");
+    }
+
+    public void signInRequestServerSideAccess(string serverClientId, bool forceRefreshToken)
+    {
+        Plugin.Call("signInRequestServerSideAccess", serverClientId, forceRefreshToken);
+    }
+
+    public void signInShowPopup()
+    {
+        Plugin.Call("signInShowPopup");
+    }
+    #endregion
+
+    #region Snapshots
+    public void snapshotsLoadGame(string fileName)
+    {
+        Plugin.Call("snapshotsLoadGame", fileName);
+    }
+
+    public void snapshotsSaveGame(string fileName, string description, byte[] saveData, int playedTimeMillis, int progressValue)
+    {
+        // ByteArray might be of a different type
+        Plugin.Call("snapshotsSaveGame", fileName, description, saveData, playedTimeMillis, progressValue);
+    }
+
+    public void snapshotsSaveGame(string title, bool allowAddButton, bool allowDelete, int maxSnapshots)
+    {
+        // ByteArray might be of a different type
+        Plugin.Call("snapshotsSaveGame", title, allowAddButton, allowDelete, maxSnapshots);
+    }
+    #endregion
 }

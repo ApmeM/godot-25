@@ -45,7 +45,10 @@ public partial class Main
         var nextLevel = button.GetNextLevel();
         if (buttonToAchievementMap.ContainsKey(button.Name))
         {
-            this.googlePlay.UnlockAchievement(buttonToAchievementMap[button.Name]);
+            if (this.googlePlay.IsEnabled())
+            {
+                this.googlePlay.achievementsUnlock(buttonToAchievementMap[button.Name], true);
+            }
         }
 
         if (nextLevel == null)
@@ -68,7 +71,7 @@ public partial class Main
     {
         if (this.googlePlay.IsEnabled())
         {
-            this.googlePlay.ShowAchievements();
+            this.googlePlay.achievementsShow();
         }
         else
         {
