@@ -7,7 +7,10 @@ public partial class AchievementList
     [Export]
     public PackedScene AchievementNotificationScene;
 
-    private IAchievementRepository achievementRepository = new LocalAchievementRepository();
+    [Export]
+    public NodePath GodotPlayGameServicePath;
+
+    private IAchievementRepository achievementRepository;
 
     public override void _Ready()
     {
@@ -15,10 +18,10 @@ public partial class AchievementList
         FillMembers();
     }
 
-    public void ReloadList()
+    public async void ReloadList()
     {
-        var achievements = achievementRepository.GetForList();
-        
+        var achievements = await GetRepository().GetForList();
+
         foreach (Node item in this.achievementsContainer.GetChildren())
         {
             item.QueueFree();
@@ -30,5 +33,29 @@ public partial class AchievementList
             this.achievementsContainer.AddChild(notification);
             notification.SetAchievement(data);
         }
+    }
+
+    private IAchievementRepository GetRepository()
+    {
+        if (this.achievementRepository == null)
+        {
+            if (this.GodotPlayGameServicePath.IsEmpty())
+            {
+                this.achievementRepository = this.di.localAchievementRepository;
+            }
+            else
+            {
+                var googlePlay = this.GetNode<GodotPlayGameService>(this.GodotPlayGameServicePath);
+                if (!googlePlay.IsEnabled())
+                {
+                    this.achievementRepository = this.di.localAchievementRepository;
+                }
+                else
+                {
+                    this.achievementRepository = googlePlay;
+                }
+            }
+        }
+        return this.achievementRepository;
     }
 }

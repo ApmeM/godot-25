@@ -52,7 +52,7 @@ public partial class AchievementNotifications
             return;
         }
 
-        var data = achievementRepository.GetAchievement(key);
+        var data = achievementRepository.GetAchievement(key).Result;
         CreateAchievementPanel(data);
     }
 

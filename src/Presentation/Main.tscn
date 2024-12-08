@@ -601,6 +601,7 @@ margin_left = 9.0
 margin_top = 9.0
 margin_right = 352.0
 margin_bottom = 616.0
+GodotPlayGameServicePath = NodePath("../../../../../../../../GooglePlay")
 
 [node name="VBoxContainer" parent="MenuLayer/CustomPopup/CustomPopupContainer/PopupContainer" index="1"]
 margin_left = 349.0

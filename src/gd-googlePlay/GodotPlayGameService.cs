@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
+using Godot25.Achievements;
+using Newtonsoft.Json;
 
 [SceneReference("GodotPlayGameService.tscn")]
-public partial class GodotPlayGameService
+public partial class GodotPlayGameService : IAchievementRepository
 {
     ///  <summary>
     /// Represents the Android plugin for the GodotPlayGameService.
@@ -228,5 +232,93 @@ public partial class GodotPlayGameService
         // ByteArray might be of a different type
         Plugin.Call("snapshotsSaveGame", title, allowAddButton, allowDelete, maxSnapshots);
     }
+
+    #endregion
+
+    #region IAchievementRepository
+
+    // Taken from https://developers.google.com/android/reference/com/google/android/gms/games/achievement/Achievement
+    private class AchievementFromPlay
+    {
+        [JsonProperty("lastUpdatedTimestamp")]
+        public long LastUpdatedTimestampMilliseconds;
+
+        [JsonProperty("name")]
+        public string Name;
+
+        [JsonProperty("description")]
+        public string Description;
+
+        [JsonProperty("totalSteps")]
+        public int TotalSteps;
+
+        [JsonProperty("achievementId")]
+        public string AchievementId;
+
+        [JsonProperty("currentSteps")]
+        public int CurrentSteps;
+
+        [JsonProperty("state")]
+        public string State; //"STATE_REVEALED",  "STATE_HIDDEN", "STATE_UNLOCKED"
+
+        [JsonProperty("unlockedImageUri")]
+        public string UnlockedImageUri;
+
+        [JsonProperty("revealedImageUri")]
+        public string RevealedImageUri;
+
+        [JsonProperty("type")]
+        public string Type; //"TYPE_STANDARD",  "TYPE_INCREMENTAL"
+
+        [JsonProperty("xpValue")]
+        public int XP;
+    }
+
+    public bool ProgressAchievement(string key, int progress)
+    {
+        this.achievementsIncrement(key, progress, true);
+        return false; // Google popup will appear, no need to show custom.
+    }
+
+    public bool UnlockAchievement(string key)
+    {
+        this.achievementsUnlock(key, true);
+        return false; // Google popup will appear, no need to show custom.
+    }
+
+    public async Task<Achievement> GetAchievement(string key)
+    {
+        this.achievementsLoad(false);
+        var result = await this.ToSignal(Plugin, "achievementsLoaded");
+        var json = result[0]?.ToString();
+        return JsonConvert.DeserializeObject<List<AchievementFromPlay>>(json)
+            .Where(a => a.AchievementId == key)
+            .Select(ToAchievement)
+            .FirstOrDefault();
+    }
+
+    public async Task<IEnumerable<Achievement>> GetForList()
+    {
+        this.achievementsLoad(false);
+        var result = await this.ToSignal(Plugin, "achievementsLoaded");
+        var json = result[0]?.ToString();
+        return JsonConvert.DeserializeObject<List<AchievementFromPlay>>(json).Select(ToAchievement);
+    }
+
+    private Achievement ToAchievement(AchievementFromPlay achievement)
+    {
+        return new Achievement
+        {
+            Achieved = achievement.State == "STATE_UNLOCKED" ? true : false,
+            CurrentProgress = achievement.CurrentSteps,
+            UnlockDate = new DateTime(1970, 1, 1).AddMilliseconds(achievement.LastUpdatedTimestampMilliseconds),
+            Goal = achievement.TotalSteps,
+            Name = achievement.Name,
+            IconPath = achievement.UnlockedImageUri,
+            Description = achievement.Description
+        };
+    }
     #endregion
 }
+
+

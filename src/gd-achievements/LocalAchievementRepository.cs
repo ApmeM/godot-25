@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 using Newtonsoft.Json;
 
@@ -80,7 +81,7 @@ namespace Godot25.Achievements
             return true;
         }
 
-        public Achievement GetAchievement(string key)
+        public Task<Achievement> GetAchievement(string key)
         {
             var achievements = EnsureAchievementsLoaded();
             if (!achievements.ContainsKey(key))
@@ -89,13 +90,13 @@ namespace Godot25.Achievements
                 return null;
             }
 
-            return achievements[key];
+            return Task.FromResult(achievements[key]);
         }
 
-        public IEnumerable<Achievement> GetForList()
+        public Task<IEnumerable<Achievement>> GetForList()
         {
             var achievements = EnsureAchievementsLoaded();
-            return achievements.Values.Where(a => !a.Hidden || a.Achieved).OrderByDescending(a => a.Achieved);
+            return Task.FromResult<IEnumerable<Achievement>>(achievements.Values.Where(a => !a.Hidden || a.Achieved).OrderByDescending(a => a.Achieved));
         }
 
         public void ResetAchievements()

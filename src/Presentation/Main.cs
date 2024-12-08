@@ -102,11 +102,11 @@ public partial class Main
 
     private void AchievementsButtonPressed()
     {
-        if (this.googlePlay.IsEnabled())
-        {
-            this.googlePlay.achievementsShow();
-        }
-        else
+        // if (this.googlePlay.IsEnabled())
+        // {
+            // this.googlePlay.achievementsShow();
+        // }
+        // else
         {
             // See achievements definitions in gd-achievements/achievements.json
             this.achievementList.ReloadList();
