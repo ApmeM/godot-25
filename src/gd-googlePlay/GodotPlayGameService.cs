@@ -37,7 +37,7 @@ public partial class GodotPlayGameService
                 // adb shell
                 // logcat | grep "APP NOT CORRECTLY CONFIGURED TO USE GOOGLE PLAY GAME SERVICES"
                 Plugin = Engine.GetSingleton(plugin_name);
-                Plugin.Call("initialize");
+                initialize();
             }
             else
             {

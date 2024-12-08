@@ -25,7 +25,7 @@ public partial class GameBase
     public delegate void ExitClick();
 
     [Signal]
-    public delegate void LevelPassed();
+    public delegate void LevelPassed(float bestScore);
 
     protected struct DataContent
     {
@@ -140,7 +140,7 @@ public partial class GameBase
 
             this.time.Text = "";
             this.hoverContainer.Visible = true;
-            this.EmitSignal(nameof(LevelPassed));
+            this.EmitSignal(nameof(LevelPassed), (float)(long)bestScore.TotalMilliseconds);
         }
     }
 
