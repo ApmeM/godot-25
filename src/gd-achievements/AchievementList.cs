@@ -1,5 +1,6 @@
 using Godot;
 using Godot25.Achievements;
+using Godot25.Presentation.Utils;
 
 [SceneReference("AchievementList.tscn")]
 public partial class AchievementList
@@ -20,13 +21,12 @@ public partial class AchievementList
 
     public async void ReloadList()
     {
+        this.achievementsContainer.ClearChildren();
+        this.loadingContainer.Visible = true;
+
         var achievements = await GetRepository().GetForList();
 
-        foreach (Node item in this.achievementsContainer.GetChildren())
-        {
-            item.QueueFree();
-        }
-
+        this.loadingContainer.Visible = false;
         foreach (var data in achievements)
         {
             var notification = (AchievementNotification)AchievementNotificationScene.Instance();
