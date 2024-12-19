@@ -399,6 +399,15 @@ scale = Vector2( 0.796875, 0.75 )
 frames = SubResource( 63 )
 playing = true
 
+[node name="ScoreLabel25" type="Label" parent="MenuLayer/StartGame25"]
+margin_left = 10.0
+margin_top = -20.0
+margin_right = 59.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 64 )
+text = "00:00"
+align = 1
+
 [node name="TitleLabel25" type="Label" parent="MenuLayer/StartGame25"]
 margin_left = 20.0
 margin_top = 45.0
@@ -410,7 +419,6 @@ text = "25"
 align = 1
 
 [node name="StartGame99" parent="MenuLayer" instance=ExtResource( 6 )]
-visible = false
 margin_left = 256.0
 margin_top = 641.0
 margin_right = 320.0
@@ -424,6 +432,16 @@ position = Vector2( 34, 14 )
 scale = Vector2( 0.796875, 0.75 )
 frames = SubResource( 63 )
 playing = true
+
+[node name="ScoreLabel99" type="Label" parent="MenuLayer/StartGame99"]
+margin_left = -52.0
+margin_top = 22.0
+margin_right = -3.0
+margin_bottom = 42.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 64 )
+text = "00:00"
+align = 1
 
 [node name="Path99" type="Line2D" parent="MenuLayer/StartGame99"]
 position = Vector2( -258, -640 )
@@ -444,7 +462,6 @@ text = "99"
 align = 1
 
 [node name="StartGameRnd" parent="MenuLayer" instance=ExtResource( 6 )]
-visible = false
 margin_left = 384.0
 margin_top = 512.0
 margin_right = 448.0
@@ -458,6 +475,16 @@ position = Vector2( 34, 14 )
 scale = Vector2( 0.796875, 0.75 )
 frames = SubResource( 63 )
 playing = true
+
+[node name="ScoreLabelRnd" type="Label" parent="MenuLayer/StartGameRnd"]
+margin_left = -50.0
+margin_top = 21.0
+margin_right = -1.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 64 )
+text = "00:00"
+align = 1
 
 [node name="PathRnd" type="Line2D" parent="MenuLayer/StartGameRnd"]
 position = Vector2( -258, -640 )
@@ -478,7 +505,6 @@ text = "??"
 align = 1
 
 [node name="StartGamePlus" parent="MenuLayer" instance=ExtResource( 6 )]
-visible = false
 margin_left = 257.0
 margin_top = 385.0
 margin_right = 320.0
@@ -492,6 +518,15 @@ position = Vector2( 34, 14 )
 scale = Vector2( 0.796875, 0.75 )
 frames = SubResource( 63 )
 playing = true
+
+[node name="ScoreLabelPlus" type="Label" parent="MenuLayer/StartGamePlus"]
+margin_left = 10.0
+margin_top = -20.0
+margin_right = 59.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 64 )
+text = "00:00"
+align = 1
 
 [node name="PathPlus" type="Line2D" parent="MenuLayer/StartGamePlus"]
 position = Vector2( -258, -640 )
@@ -512,7 +547,6 @@ text = "+"
 align = 1
 
 [node name="StartGameMult" parent="MenuLayer" instance=ExtResource( 6 )]
-visible = false
 margin_left = 129.0
 margin_top = 321.0
 margin_right = 192.0
@@ -525,6 +559,15 @@ position = Vector2( 34, 14 )
 scale = Vector2( 0.796875, 0.75 )
 frames = SubResource( 63 )
 playing = true
+
+[node name="ScoreLabelMult" type="Label" parent="MenuLayer/StartGameMult"]
+margin_left = 10.0
+margin_top = -20.0
+margin_right = 59.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 64 )
+text = "00:00"
+align = 1
 
 [node name="PathMult" type="Line2D" parent="MenuLayer/StartGameMult"]
 position = Vector2( -258, -640 )
