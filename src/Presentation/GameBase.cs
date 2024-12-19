@@ -135,7 +135,7 @@ public partial class GameBase
             }
             else
             {
-                this.finalTime.Text += "\nBest time:\n" + bestScore.ToString(@"hh\:mm\:ss"); ;
+                this.finalTime.Text += "\nBest time:\n" + bestScore.ToString(@"hh\:mm\:ss");
             }
 
             this.time.Text = "";

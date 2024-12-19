@@ -19,13 +19,13 @@ public partial class GameMult
         var set = new HashSet<int>();
         for (var j = 0; j < 25; j++)
         {
-            var arg1 = r.Next(9) + 1;
-            var arg2 = r.Next(9) + 1;
+            var arg1 = r.Next(8) + 2;
+            var arg2 = r.Next(8) + 2;
             var newValue = arg1 * arg2;
             while (set.Contains(newValue))
             {
-                arg1 = r.Next(9) + 1;
-                arg2 = r.Next(9) + 1;
+                arg1 = r.Next(8) + 2;
+                arg2 = r.Next(8) + 2;
                 newValue = arg1 * arg2;
             }
             set.Add(newValue);
