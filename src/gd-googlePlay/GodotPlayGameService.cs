@@ -227,10 +227,9 @@ public partial class GodotPlayGameService : IAchievementRepository
         Plugin.Call("snapshotsSaveGame", fileName, description, saveData, playedTimeMillis, progressValue);
     }
 
-    public void snapshotsSaveGame(string title, bool allowAddButton, bool allowDelete, int maxSnapshots)
+    public void snapshotsShowSavedGames(string title, bool allowAddButton, bool allowDelete, int maxSnapshots)
     {
-        // ByteArray might be of a different type
-        Plugin.Call("snapshotsSaveGame", title, allowAddButton, allowDelete, maxSnapshots);
+        Plugin.Call("snapshotsShowSavedGames", title, allowAddButton, allowDelete, maxSnapshots);
     }
 
     #endregion
