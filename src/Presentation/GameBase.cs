@@ -22,10 +22,13 @@ public partial class GameBase
     private DateTime? startedDate;
 
     [Signal]
-    public delegate void ExitClick();
+    public delegate void ExitClick(bool openNextLevel);
 
     [Signal]
     public delegate void LevelPassed(float bestScore);
+
+    [Export]
+    public bool NextLevelVisible { get; set; }
 
     protected struct DataContent
     {
@@ -52,11 +55,17 @@ public partial class GameBase
         this.exitGame.Connect(CommonSignals.Pressed, this, nameof(ExitGameClicked));
         this.startGame.Connect(CommonSignals.Pressed, this, nameof(GameStartButtonPressed));
         this.restartGame.Connect(CommonSignals.Pressed, this, nameof(GameRestartButtonPressed));
+        this.nextLevel.Connect(CommonSignals.Pressed, this, nameof(NextlevelButtonPressed));
+    }
+
+    private void NextlevelButtonPressed()
+    {
+        this.EmitSignal(nameof(ExitClick), true);
     }
 
     private void ExitGameClicked()
     {
-        this.EmitSignal(nameof(ExitClick));
+        this.EmitSignal(nameof(ExitClick), false);
     }
 
     private void InitButtons()
@@ -84,6 +93,7 @@ public partial class GameBase
     {
         this.restartGame.Visible = true;
         this.startGame.Text = "Restart";
+        this.nextLevel.Visible = this.NextLevelVisible;
         GameRestartButtonPressed();
     }
 

@@ -352,6 +352,17 @@ size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
 text = "Start"
 
+[node name="NextLevel" type="Button" parent="GameFieldContainer/HoverContainer/HoverPanel/HoverControlContainer"]
+visible = false
+margin_top = 149.0
+margin_right = 200.0
+margin_bottom = 219.0
+rect_min_size = Vector2( 200, 70 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "Next Level"
+
 [node name="Time" type="Label" parent="."]
 margin_top = 511.0
 margin_right = 440.0

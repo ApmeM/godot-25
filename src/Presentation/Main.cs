@@ -46,12 +46,13 @@ public partial class Main
     private void GameStartButtonPressed(LevelButton button)
     {
         this.gameContainer.ClearChildren();
-        var game = button.GameToStart.Instance();
+        var game = button.GameToStart.Instance<GameBase>();
         this.gameContainer.AddChild(game);
-        game.Connect(nameof(GameBase.ExitClick), this, nameof(ExitGameClicked));
+        game.Connect(nameof(GameBase.ExitClick), this, nameof(ExitGameClicked), new Godot.Collections.Array(button));
         game.Connect(nameof(GameBase.LevelPassed), this, nameof(LevelPassed), new Godot.Collections.Array(button));
         this.gameContainer.Visible = true;
         this.menuLayer.Visible = false;
+        game.NextLevelVisible = button.NextLevelButton != null && !button.NextLevelButton.IsEmpty();
     }
 
     private void LevelPassed(float bestScore, LevelButton button)
@@ -95,18 +96,24 @@ public partial class Main
         di.repository.SaveProgress(nextLevel.Name);
     }
 
-    private void ExitGameClicked()
+    private void ExitGameClicked(bool openNextLevel, LevelButton button)
     {
         this.gameContainer.ClearChildren();
         this.gameContainer.Visible = false;
         this.menuLayer.Visible = true;
+
+        if (openNextLevel)
+        {
+            var nextLevel = button.GetNextLevel();
+            GameStartButtonPressed(nextLevel);
+        }
     }
 
     private void AchievementsButtonPressed()
     {
         // if (this.googlePlay.IsEnabled())
         // {
-            // this.googlePlay.achievementsShow();
+        // this.googlePlay.achievementsShow();
         // }
         // else
         {
