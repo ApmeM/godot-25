@@ -419,6 +419,7 @@ text = "25"
 align = 1
 
 [node name="StartGame99" parent="MenuLayer" instance=ExtResource( 6 )]
+visible = false
 margin_left = 256.0
 margin_top = 641.0
 margin_right = 320.0
@@ -462,6 +463,7 @@ text = "99"
 align = 1
 
 [node name="StartGameRnd" parent="MenuLayer" instance=ExtResource( 6 )]
+visible = false
 margin_left = 384.0
 margin_top = 512.0
 margin_right = 448.0
@@ -505,6 +507,7 @@ text = "??"
 align = 1
 
 [node name="StartGamePlus" parent="MenuLayer" instance=ExtResource( 6 )]
+visible = false
 margin_left = 257.0
 margin_top = 385.0
 margin_right = 320.0
@@ -547,6 +550,7 @@ text = "+"
 align = 1
 
 [node name="StartGameMult" parent="MenuLayer" instance=ExtResource( 6 )]
+visible = false
 margin_left = 129.0
 margin_top = 321.0
 margin_right = 192.0

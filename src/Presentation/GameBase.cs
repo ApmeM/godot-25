@@ -140,7 +140,7 @@ public partial class GameBase
             var bestScore = di.repository.LoadGame(this.GetType().Name);
             if (bestScore > finalScore)
             {
-                di.repository.SaveGame(this.GetType().Name, finalScore);
+                di.repository.SaveGame(this.Name, finalScore);
                 this.finalTime.Text += "\nNEW BEST!!!";
             }
             else

@@ -10,6 +10,8 @@ public partial class LevelButton
     [Export]
     public NodePath NextLevelButton;
 
+    public string LevelName => this.GameToStart.GetState().GetNodeName(0);
+
     public override void _Ready()
     {
         base._Ready();

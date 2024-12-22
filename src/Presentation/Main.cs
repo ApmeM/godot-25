@@ -38,7 +38,7 @@ public partial class Main
             b.Connect(CommonSignals.Pressed, this, nameof(GameStartButtonPressed), new Godot.Collections.Array { b });
             b.Visible = b.Visible || progress.Contains(b.Name);
             b.GetChild<AnimatedSprite>(0).Visible = progress.Contains(b.Name + "Fire");
-            var score = this.di.repository.LoadGame(b.GameToStart.Instance().GetType().Name);
+            var score = this.di.repository.LoadGame(b.LevelName);
             b.GetChild<Label>(1).Text = score == TimeSpan.MaxValue ? "" : score.ToString(@"mm\:ss");
         }
     }
